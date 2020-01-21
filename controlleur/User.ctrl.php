@@ -37,7 +37,7 @@ class CtrlUser extends Controller {
 			$d['log'] = '<div class="alert alert-success" role="alert">Inscription réussie !</div>';
 			$this->set($d);
 
-			header('Location:'.WEBROOT.'Library/index', $id);
+			header('Location:'.WEBROOT.'Library/index');
 
 		} else {
 			$this->render('default','User','signIn');

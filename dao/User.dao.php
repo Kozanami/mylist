@@ -7,6 +7,7 @@ class DaoUser {
         $user->setId(DB::lastId());
         return $user;
     }
+    
     public function read($id) {
         $datas = DB::request('SELECT * FROM  user WHERE id = ? AND archive = 0',array($id));
         if (!empty($datas)) {

@@ -32,13 +32,13 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="<?= WEBROOT ?>Library/index">Toute la Bibliothèque</a>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/index/Film">Les Films</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/index/Series">Les Séries</a>
+                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/film">Les Films</a>
+                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/serie">Les Séries</a>
                         </div>
                     </li>
 
-                    <?php 
+                    <?php
                     
                         if (isset($_SESSION['id']))
                         {
@@ -56,11 +56,11 @@
                     ?>
 
                     <li class="nav-item">
-                        <a href="<?= WEBROOT ?>User/signIn">Inscription</a>
+                        <a href="<?= WEBROOT ?>User/signIn"> Inscription</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="<?= WEBROOT ?>User/logIn">Connexion</a>
+                        <a href="<?= WEBROOT ?>User/logIn"> Connexion</a>
                     </li>
 
                     <?php 
@@ -74,8 +74,8 @@
         <!-- Header content -->
         <header></header>
         
-
         <main class="container-fluid">
+        <?php require_once('module/errorModule.php'); ?>
         <?= $content ?>
         </main>
 

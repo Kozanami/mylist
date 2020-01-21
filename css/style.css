@@ -3,6 +3,10 @@
     --color-perso1: hsl(190, 96%, 31%);
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 header{
     height: 10vh;
 }
@@ -19,7 +23,7 @@ footer{
     line-height:32px;
     font-size:1.25em;
     color: hsla(51, 100%, 50%, 0.9)
-  }
+}
 
 .add-media{
     border-radius: 10px 10px 0 0 !important;

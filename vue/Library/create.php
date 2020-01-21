@@ -8,24 +8,24 @@
 			?>
 		<div class="form-group">
 			<label for="name">Name</label>
-			<input type="text" name="name" class="form-control" id="name" placeholder="Interstellar" required>
+			<input type="text" name="name" class="form-control" id="name" placeholder="Interstellar" value="test<?= sha1(random_int(1,1000)); ?>" required>
 		</div>
 
 		<div class="form-group">
 		<label for="category">Type</label>
-		<select id="category" name="category" class="form-control">
+		<select id="category" name="category" class="form-control" required>
 			<option selected disabled>Choisi un Type</option>
-			<option>Film</option>
-			<option>Série</option>
-			<option>Anime</option>
-			<option>Déssin Animé</option>
-			<option>Cour Métrage</option>
+			<option value="1">Film</option>
+			<option value="2">Série</option>
+			<option value="3">Anime</option>
+			<option value="5">Déssin Animé</option>
+			<option value="6">Cour Métrage</option>
 		</select>
 		</div>
 
 		<div class="form-group">
 			<label for="subcategory">Genre</label>
-			<input type="subcategory" name="subcategory" id="subcategory" class="form-control" placeholder="Science-Fiction" required>
+			<input type="subcategory" name="subcategory" id="subcategory" class="form-control" placeholder="Science-Fiction" value="sf" required>
 		</div>
 
 		<div class="form-row">
@@ -58,7 +58,7 @@
 
 		<div class="form-group">
 			<label for="evaluation">Note</label>
-			<input type="number" name="evaluation" id="evaluation" class="form-control">
+			<input type="number" name="evaluation" id="evaluation" class="form-control" value="1">
 		</div>
 
 		<div class="form-group">

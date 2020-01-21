@@ -11,6 +11,7 @@
 	require_once('core/controller.php');
 	require_once('core/abstractEntity.php');
 	require_once('core/config.php');
+	require_once('core/globalMethod.php');
 	
 	if(!isset($_SESSION['id']) AND isset($_COOKIE['email'],$_COOKIE['password']) AND !empty($_COOKIE['email']) AND !empty($_COOKIE['password']))
 	{

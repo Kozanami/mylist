@@ -54,7 +54,6 @@ class DB {
   public static function emailCheck($email)
   {
     $request = self::request('SELECT * FROM user WHERE email = ? AND archive = 0', array($email));
-
   return $request;
   }
 

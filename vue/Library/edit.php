@@ -34,11 +34,11 @@
 				echo '<option selected disabled>Choisi un Type</option>';
 			}
 			?>
-			<option>Film</option>
-			<option>Série</option>
-			<option>Anime</option>
-			<option>Déssin Animé</option>
-			<option>Cour Métrage</option>
+			<option value="1">Film</option>
+			<option value="2">Série</option>
+			<option value="3">Anime</option>
+			<option value="5">Déssin Animé</option>
+			<option value="6">Cour Métrage</option>
 		</select>
 		</div>
 			<input type="hidden" name="id" value="<?= $data->getId(); ?>">
