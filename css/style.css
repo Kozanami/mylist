@@ -1,0 +1,54 @@
+:root{
+    --color-perso: hsl(190, 96%, 31%);
+    --color-perso1: hsl(190, 96%, 31%);
+}
+
+header{
+    height: 10vh;
+}
+
+main{
+    height: 80vh;
+}
+
+footer{
+    height: 10vh;
+}
+
+.star-rating {
+    line-height:32px;
+    font-size:1.25em;
+    color: hsla(51, 100%, 50%, 0.9)
+  }
+
+.add-media{
+    border-radius: 10px 10px 0 0 !important;
+} 
+
+.library-border{
+    border-radius: 0 0 10px 10px  !important;
+}
+
+.color-perso{
+    color: var(--color-perso)!important;
+}
+
+.bg-perso{
+    background: var(--color-perso)!important;
+}
+
+.color-perso:hover{
+    color: var(--color-perso1)!important;
+}
+
+.bg-perso:hover{
+    background: var(--color-perso1)!important;
+}
+
+.color-perso:active{
+    color: var(--color-perso)!important;
+}
+
+.bg-perso:active{
+    background: var(--color-perso)!important;
+}
