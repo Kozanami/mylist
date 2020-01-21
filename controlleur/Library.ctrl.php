@@ -215,7 +215,7 @@ class CtrlLibrary extends Controller {
 				$library = new Library($name,$category,$subcategory,$season,$smax,$episode,$epmax,$tag,$evaluation,$note,$userid);
 				$this->DaoLibrary->create($library);
 
-				$d['log'] = '<div class="alert alert-success" role="alert">Envoie effectuer</div>';
+				errorLog('alert','Envoie effectuer');
 				$this->set($d);
 
 				header('Location:'.WEBROOT.'Library/index/'.$id);

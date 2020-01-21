@@ -11,77 +11,23 @@
         
     <body>
 
-        <!-- Navbar content -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <a class="navbar-brand"  href="<?= WEBROOT ?>Library/index">Maliste</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <!-- Button home
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Bibliothèque
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/index">Toute la Bibliothèque</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/film">Les Films</a>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/serie">Les Séries</a>
-                        </div>
-                    </li>
-
-                    <?php
-                    
-                        if (isset($_SESSION['id']))
-                        {
-
-                    ?>
-
-                    <li class="nav-item">
-                        <a href="<?= WEBROOT ?>User/logOut" class="nav-link"> Déconnexion</a>
-                    </li>
-
-                    <?php  
-                        } 
-                        else 
-                        {
-                    ?>
-
-                    <li class="nav-item">
-                        <a href="<?= WEBROOT ?>User/signIn"> Inscription</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="<?= WEBROOT ?>User/logIn"> Connexion</a>
-                    </li>
-
-                    <?php 
-                        } 
-                    ?>
-
-                </ul>
-            </div>
-        </nav>
-
         <!-- Header content -->
-        <header></header>
+        <header>
+
+        </header>
+
+        <!-- Navbar content -->
+        <?php require_once('module/navBar.php'); ?>
         
         <main class="container-fluid">
-        <?php require_once('module/errorModule.php'); ?>
+
+        <?php require_once('module/error.php'); ?>
+
         <?= $content ?>
         </main>
 
         <!-- Footer content -->
         <footer>
         </footer>
-
     </body>
 </html>
