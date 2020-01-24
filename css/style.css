@@ -13,6 +13,11 @@ body{
     background: var(--dark-bg)!important;
 }
 
+h1
+{
+    color: #fff;
+}
+
 header{
     height: 15vh;
     background: url(../img/background.png);

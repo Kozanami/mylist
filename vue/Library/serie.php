@@ -1,4 +1,4 @@
-<div class="container-fluid col-md-8 text-center">
+<div class="container-fluid col-md-6 text-center">
   <a href="<?= WEBROOT.'Library/create' ?>"><button type="button" class="add-media btn btn-primary bg-perso btn-lg btn-block"><i class="fas fa-plus"></i> Ajouter un média</button></a>
 
   <table class="table table-striped table-dark mb-0">

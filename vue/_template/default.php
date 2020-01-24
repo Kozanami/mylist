@@ -21,7 +21,7 @@
         
         <main class="container-fluid">
 
-        <?php //require_once('module/error.php'); ?>
+        <?php loadPartials('logMessage'); ?>
 
         <?= $content ?>
         </main>

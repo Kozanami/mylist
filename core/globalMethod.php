@@ -8,7 +8,7 @@
     // Charger un Partials
     function loadPartials($name,$data = null)
     {
-        require_once($_SERVER['DOCUMENT_ROOT'] . SERVERNAME . '/vue/_partials/'.$name.'.php');
+        require($_SERVER['DOCUMENT_ROOT'] . SERVERNAME . '/vue/_partials/'.$name.'.php');
         return $data;
     }
 
@@ -17,7 +17,7 @@
     /////////////////////////////////////////////////
 
     // Error Module
-    function errorLog($type, $message)
+    function logMessage($type, $message)
     {
         $_SESSION['logType'] = $type;
         $_SESSION['logMessage'] = $message;

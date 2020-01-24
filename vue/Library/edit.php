@@ -3,23 +3,18 @@
 	<?php 
 	if (isset($library)) {
 		foreach($library as $key => $data){
-	}
+		}
 	}
 	?>
 	</div>
 
 	<form action="<?php WEBROOT ?>Library/edit" method="POST" class="content col-auto">
 		<h1 class="text-center">Ajouter un média à ma liste</h1>
-			<?php 
-				if (isset($log)) {
-					echo $log;
-				}
-			?>
 		<input type="hidden" name="id" value="<?php $data->getId(); ?>">
-
+		
 		<div class="form-group">
 			<label for="name">Name</label>
-			<input type="text" name="name" class="form-control" id="name" placeholder="Interstellar" value="<?php $data->getName(); ?>">
+			<input type="text" name="name" class="form-control" id="name" placeholder="Interstellar" value="<?php echo $data->getName(); ?>">
 		</div>
 
 		<div class="form-group">
@@ -54,6 +49,8 @@
 				echo '<option selected disabled>Choisi un Type</option>';
 			}
 
+
+			
 			switch($data->getCategory())
 			{
 				case 1:
@@ -110,49 +107,49 @@
 			?>
 		</select>
 		</div>
-			<input type="hidden" name="id" value="<?php $data->getId(); ?>">
+			<input type="hidden" name="id" value="<?php echo $data->getId(); ?>">
 		<div class="form-group">
 			<label for="subcategory">Genre</label>
-			<input type="subcategory" name="subcategory" id="subcategory" class="form-control" placeholder="Science-Fiction" value="<?php $data->getSubcategory(); ?>">
+			<input type="subcategory" name="subcategory" id="subcategory" class="form-control" placeholder="Science-Fiction" value="<?php echo $data->getSubcategory(); ?>">
 		</div>
 
 		<div class="form-row">
 		<div class="col">
 			<label for="episode">Episode actuelle</label>
-			<input type="number" name="episode" id="episode" class="form-control" placeholder="5"  value="<?php $data->getSeason(); ?>">
+			<input type="number" name="episode" id="episode" class="form-control" placeholder="5"  value="<?php echo $data->getSeason(); ?>">
 		</div>
 		<div class="col">
 		<label for="epmax">Episode max</label>
-			<input type="number" name="epmax" id="epmax" class="form-control" placeholder="24"  value="<?php $data->getSmax(); ?>">
+			<input type="number" name="epmax" id="epmax" class="form-control" placeholder="24"  value="<?php echo $data->getSmax(); ?>">
 		</div>
 		</div>
 
 		<div class="form-row">
 		<div class="col">
 			<label for="season">Saison actuelle</label>
-			<input type="number" name="season" id="season" class="form-control" placeholder="2"  value="<?php $data->getEpisode(); ?>">
+			<input type="number" name="season" id="season" class="form-control" placeholder="2"  value="<?php echo $data->getEpisode(); ?>">
 		</div>
 		<div class="col">
 			<label for="smax">Saisons max</label>
-			<input type="number" name="smax" id="smax" class="form-control" placeholder="4"  value="<?php $data->getEpmax(); ?>">
+			<input type="number" name="smax" id="smax" class="form-control" placeholder="4"  value="<?php echo $data->getEpmax(); ?>">
 		</div>
 	</div>
 
 
 		<div class="form-group">
 			<label for="tag">Tag</label>
-			<input type="text" name="tag" id="tag" class="form-control" placeholder="espace, temporelle, voyage"  value="<?php $data->getTag(); ?>">
+			<input type="text" name="tag" id="tag" class="form-control" placeholder="espace, temporelle, voyage"  value="<?php echo $data->getTag(); ?>">
 		</div>
 
 		<div class="form-group">
 			<label for="evaluation">Note</label>
-			<input type="number" name="evaluation" id="evaluation" class="form-control"  value="<?php $data->getEvaluation(); ?>">
+			<input type="number" name="evaluation" id="evaluation" class="form-control"  value="<?php echo $data->getEvaluation(); ?>">
 		</div>
 
 		<div class="form-group">
 			<label for="note">Mémo</label>
 			<textarea id="note" name="note" class="form-control"
-			rows="5" cols="33" placeholder="Pour me rappeller, mettre une description ou autre"><?php $data->getNote(); ?></textarea>
+			rows="5" cols="33" placeholder="Pour me rappeller, mettre une description ou autre"><?php echo $data->getNote(); ?></textarea>
 
 		</div>
 			<button type="submit" class="btn btn-primary col-lg">Editer</button>

@@ -332,12 +332,16 @@ class CtrlLibrary extends Controller {
 				$library = new Library($name,$category,$subcategory,$season,$smax,$episode,$epmax,$tag,$evaluation,$note,$userid);
 				$this->DaoLibrary->update($library,$id);
 
-				$d['log'] = '<div class="alert alert-success" role="alert">Envoie effectuer</div>';
-				$pmax = 5;
+				logMessage('sucess','Envoie effectuer');
 				$this->set($d);
-
-				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/'.$id);
-
+				if(isset($_SESSION['pageName']))
+				{
+					header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName']);
+				}
+				else
+				{
+					header('Location:'.WEBROOT.'Library/index/');
+				}
 			}
 			else 
 			{
@@ -347,10 +351,8 @@ class CtrlLibrary extends Controller {
 
 				foreach($d['library'] as $key => $data){}
 		
-				$tempTitle = $data->getName();
-		
-				$d['title'] = 'Modifier : '.$tempTitle;
-
+				$d['title'] = 'Modifier : '.$data->getName();
+				$d['id'] = $id;
 				$this->set($d);
 				$this->render('default','Library','edit', $id);
 			}
@@ -391,7 +393,7 @@ class CtrlLibrary extends Controller {
 				$library = new Library($name,$category,$subcategory,$season,$smax,$episode,$epmax,$tag,$evaluation,$note,$userid);
 				$this->DaoLibrary->create($library);
 
-				errorLog('alert','Envoie effectuer');
+				logMessage('alert','Envoie effectuer');
 
 				$this->set($d);
 
@@ -443,7 +445,7 @@ class CtrlLibrary extends Controller {
 			$this->loadDao('Library');
 			$this->DaoLibrary->delete($id);
 
-			errorLog('alert','Le média a bien était supprimer de la liste');
+			logMessage('danger','Le média a bien était supprimer de la liste');
 
 			header('Location:'.WEBROOT.'Library/index');
 		}
