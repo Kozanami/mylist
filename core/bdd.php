@@ -50,19 +50,17 @@ class DB {
     return self::connect()->lastInsertId();
   }
 
-  // Methodes pour les cookies
-  public static function emailCheck($email)
+  //Methode pour les cookies
+  public static function authCheck($email,$pass)
   {
-    $request = self::request('SELECT * FROM user WHERE email = ? AND archive = 0', array($email));
+    $request = self::request('SELECT * FROM user WHERE email = ? AND password = ?', array($email,$pass));
   return $request;
   }
 
-  public static function passCheck($pass)
+  public static function getId($email,$pass)
   {
-  $request = self::request('SELECT * FROM user WHERE password = ? AND archive = 0', array($pass));
-
-  return $request;
+    $request = self::request('SELECT id FROM user WHERE email = ? AND password = ?', array($email,$pass));
+    return $request[0]['id'];
   }
-
 }
 ?>

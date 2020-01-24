@@ -57,14 +57,14 @@ class CtrlUser extends Controller {
 				$passInput = htmlentities($this->input['password']);
 				$passUser = $user->getPassword();
 				$rememberUser = htmlentities($_POST['rememberme']);
-
+				// on vérifie que le POST['rememberme'] existe sinon on attribut false a la variable $rememberUser
 				if (password_verify($passInput, $passUser)) {
 					$_SESSION['id'] = htmlentities($user->getId());
 					$_SESSION['email'] = htmlentities($user->getEmail());
-
+					// si $rememberUser existe et égale à true alors on crée les cookie sinon on les supprimer si il existes
 					if(isset($rememberUser) AND $rememberUser == true) {
-						setcookie('email',$email,time()+365*24*3600,null,null,$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
-						setcookie('password',$passUser,time()+365*24*3600,null,null,$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+						setcookie('email',$email,time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+						setcookie('password',$passUser,time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
 					}
 					else
 					{
@@ -90,8 +90,8 @@ class CtrlUser extends Controller {
 	}
 
 	public function logOut() {
-		setcookie('email','',time()-3600);
-		setcookie('password','',time()-3600);
+		setcookie('email','',time()-3600,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+		setcookie('password','',time()-3600,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
 		session_unset();
 		session_destroy();
 		header('Location:'.WEBROOT.'User/logIn');

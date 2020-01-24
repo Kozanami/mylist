@@ -13,17 +13,17 @@
 	require_once('core/config.php');
 	require_once('core/globalMethod.php');
 	
-	if(!isset($_SESSION['id']) AND isset($_COOKIE['email'],$_COOKIE['password']) AND !empty($_COOKIE['email']) AND !empty($_COOKIE['password']))
-	{
-		if(DB::emailCheck($_COOKIE['email']) && DB::passCheck($_COOKIE['password']));
-		{
-		setcookie('email',$_COOKIE['email'],time()+365*24*3600,null,null,$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
-		setcookie('password',$_COOKIE['password'],time()+365*24*3600,null,null,$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
-		$_SESSION['id'] = htmlentities($user->getId());
-		$_SESSION['email'] = htmlentities($user->getEmail());
-		}
-	}
-
+    if(!isset($_SESSION['id']) AND isset($_COOKIE['email']) AND isset($_COOKIE['password']) AND !empty($_COOKIE['email']) AND !empty($_COOKIE['password']))
+    {
+        if(DB::authCheck($_COOKIE['email'],$_COOKIE['password']))
+        {
+        setcookie('email',$_COOKIE['email'],time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+        setcookie('password',$_COOKIE['password'],time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+        $_SESSION['id'] = htmlentities(DB::getId($_COOKIE['email'],$_COOKIE['password']));
+		$_SESSION['email'] = htmlentities($_COOKIE['email']);
+		header('Location:'.WEBROOT.'Library/index');
+        }
+    }
 	/*ROUTAGE*/
 	// Page par default
 	if (isset($_GET['p'])) {

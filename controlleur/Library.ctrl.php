@@ -216,6 +216,7 @@ class CtrlLibrary extends Controller {
 				$this->DaoLibrary->create($library);
 
 				errorLog('alert','Envoie effectuer');
+
 				$this->set($d);
 
 				header('Location:'.WEBROOT.'Library/index/'.$id);
