@@ -5,6 +5,8 @@
 	// ROOT => dossier du projet de la racine du disque dur
 	define('ROOT',str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 
+	define('SERVERNAME',basename(__DIR__));
+
 
 	// Init 
 	require_once('core/bdd.php');

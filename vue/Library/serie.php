@@ -29,22 +29,8 @@
         </td>
         <td class="d-lg-block d-none">
           <?php
-            for($i=0; $data->getEvaluation() > $i ; $i++)
-            {
-              if(($i % 2) !== 0)
-              {
-              ?>
-                <img class="star-rating" src="<?= WEBROOT ?>img/star-24px.svg" alt="étoile notation">
-              <?php
-              }
-            }
-            if(($i % 2) !== 0)
-            { 
-              ?>
-                <img class="star-rating" src="<?= WEBROOT ?>img/star_half-24px.svg" alt="étoile notation">
-              <?php
-            }
-          ?>
+              loadPartials('evaluation',$data->getEvaluation());
+            ?>
         </td>
          
         <td class="d-lg-none d-block">
@@ -58,5 +44,5 @@
       ?>
     </tbody>
   </table>
-<?php require('pagination.php'); ?>
+    <?php loadPartials('pagination'); ?>
 </div>

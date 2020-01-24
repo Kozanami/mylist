@@ -23,17 +23,26 @@ class CtrlLibrary extends Controller {
 
 			if( $countmax > 0 )
 			{
-				$d['pmax'] = ceil( $countmax / $entityByPage );
+				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
 			}
 			else
 			{
-				$d['pmax'] = 1;
+				$_SESSION['pageMax'] = 1;
 			}
-			$d['type'] = 'index';
-			$d['pId'] = $id;
+
+			if($id > $_SESSION['pageMax'])
+			{
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
+			}
+			else
+			{
+				$_SESSION['pageID'] = $id;
+			}
+
+			$_SESSION['pageName'] = 'index';
 			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry);
 			$this->set($d);
-			$this->render('default','Library','index', $id);				
+			$this->render('default','Library',$_SESSION['pageName'], $id);				
 		} 
 		else 
 		{
@@ -64,14 +73,23 @@ class CtrlLibrary extends Controller {
 
 			if( $countmax > 0 )
 			{
-				$d['pmax'] = ceil( $countmax / $entityByPage );
+				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
 			}
 			else
 			{
-				$d['pmax'] = 1;
+				$_SESSION['pageMax'] = 1;
 			}
-			$d['type'] = 'film';
-			$d['pId'] = $id;
+
+			if($id > $_SESSION['pageMax'])
+			{
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
+			}
+			else
+			{
+				$_SESSION['pageID'] = $id;
+			}
+
+			$_SESSION['pageName'] = 'film';
 			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,1);
 			$this->set($d);
 			$this->render('default','Library','film', $id);				
@@ -102,17 +120,26 @@ class CtrlLibrary extends Controller {
 
 			$firstEntry = ($currentPage-1)*$entityByPage;
 			$countmax = $this->DaoLibrary->countLibrary($userid,2);
-			$d['test'] = $countmax;
+
 			if( $countmax > 0 )
 			{
-				$d['pmax'] = ceil( $countmax / $entityByPage );
+				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
 			}
 			else
 			{
-				$d['pmax'] = 1;
+				$_SESSION['pageMax'] = 1;
 			}
-			$d['type'] = 'serie';
-			$d['pId'] = $id;
+
+			if($id > $_SESSION['pageMax'])
+			{
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
+			}
+			else
+			{
+				$_SESSION['pageID'] = $id;
+			}
+
+			$_SESSION['pageName'] = 'serie';
 			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,2);
 			$this->set($d);
 			$this->render('default','Library','serie', $id);				
@@ -125,6 +152,155 @@ class CtrlLibrary extends Controller {
 		}
 	}
 
+	public function anime($id = 1)
+	{
+		if($id == 0 OR $id < 1)
+		{
+			$id = 1;
+		}
+		$entityByPage = $_SESSION['entityByPage'];
+		
+		$d['title'] = 'Bibliothèque des Animés';
+
+		if (isset($_SESSION['id'])) {
+			$userid = $_SESSION['id'];
+			$this->loadDao('Library');
+
+			$currentPage = $id;
+
+			$firstEntry = ($currentPage-1)*$entityByPage;
+			$countmax = $this->DaoLibrary->countLibrary($userid,3);
+
+			if( $countmax > 0 )
+			{
+				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
+			}
+			else
+			{
+				$_SESSION['pageMax'] = 1;
+			}
+
+			if($id > $_SESSION['pageMax'])
+			{
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
+			}
+			else
+			{
+				$_SESSION['pageID'] = $id;
+			}
+
+			$_SESSION['pageName'] = 'anime';
+			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,3);
+			$this->set($d);
+			$this->render('default','Library',$_SESSION['pageName'], $id);				
+		} 
+		else 
+		{
+			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
+			$this->set($d); 
+			$this->render('default','User','logIn');
+		}
+	}
+
+	public function dessinAnime($id = 1)
+	{
+		if($id == 0 OR $id < 1)
+		{
+			$id = 1;
+		}
+		$entityByPage = $_SESSION['entityByPage'];
+		
+		$d['title'] = 'Bibliothèque des Déssin Animés';
+
+		if (isset($_SESSION['id'])) {
+			$userid = $_SESSION['id'];
+			$this->loadDao('Library');
+
+			$currentPage = $id;
+
+			$firstEntry = ($currentPage-1)*$entityByPage;
+			$countmax = $this->DaoLibrary->countLibrary($userid,4);
+
+			if( $countmax > 0 )
+			{
+				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
+			}
+			else
+			{
+				$_SESSION['pageMax'] = 1;
+			}
+
+			if($id > $_SESSION['pageMax'])
+			{
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
+			}
+			else
+			{
+				$_SESSION['pageID'] = $id;
+			}
+
+			$_SESSION['pageName'] = 'dessinAnime';
+			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,4);
+			$this->set($d);
+			$this->render('default','Library',$_SESSION['pageName'], $id);				
+		} 
+		else 
+		{
+			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
+			$this->set($d); 
+			$this->render('default','User','logIn');
+		}
+	}
+
+	public function courtMetrage($id = 1)
+	{
+		if($id == 0 OR $id < 1)
+		{
+			$id = 1;
+		}
+		$entityByPage = $_SESSION['entityByPage'];
+		
+		$d['title'] = 'Bibliothèque des court métrages';
+
+		if (isset($_SESSION['id'])) {
+			$userid = $_SESSION['id'];
+			$this->loadDao('Library');
+
+			$currentPage = $id;
+
+			$firstEntry = ($currentPage-1)*$entityByPage;
+			$countmax = $this->DaoLibrary->countLibrary($userid,5);
+
+			if( $countmax > 0 )
+			{
+				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
+			}
+			else
+			{
+				$_SESSION['pageMax'] = 1;
+			}
+
+			if($id > $_SESSION['pageMax'])
+			{
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
+			}
+			else
+			{
+				$_SESSION['pageID'] = $id;
+			}
+
+			$_SESSION['pageName'] = 'courtMetrage';
+			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,5);
+			$this->set($d);
+			$this->render('default','Library',$_SESSION['pageName'], $id);				
+		} 
+		else 
+		{
+			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
+			$this->set($d); 
+			$this->render('default','User','logIn');
+		}
+	}
 
 	public function edit($id = null)
 	{
@@ -160,7 +336,7 @@ class CtrlLibrary extends Controller {
 				$pmax = 5;
 				$this->set($d);
 
-				header('Location:'.WEBROOT.'Library/index/'.$id);
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/'.$id);
 
 			}
 			else 
@@ -219,8 +395,8 @@ class CtrlLibrary extends Controller {
 
 				$this->set($d);
 
-				header('Location:'.WEBROOT.'Library/index/'.$id);
-
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/'.$id);
+				
 			}
 			else 
 			{

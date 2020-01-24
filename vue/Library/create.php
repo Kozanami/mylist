@@ -18,8 +18,8 @@
 			<option value="1">Film</option>
 			<option value="2">Série</option>
 			<option value="3">Anime</option>
-			<option value="5">Déssin Animé</option>
-			<option value="6">Cour Métrage</option>
+			<option value="4">Déssin Animé</option>
+			<option value="5">Cour Métrage</option>
 		</select>
 		</div>
 

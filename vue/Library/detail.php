@@ -6,9 +6,30 @@
 				<?php 
 					if (isset($library)) {
 						foreach($library as $key => $data){
+
+						switch($data->getCategory())
+						{
+							case 1:
+								$category = 'Film';
+								break;
+							case 2:
+								$category = 'Série';
+								break;
+							case 3:
+								$category = 'Anime';
+								break;
+							case 4:
+								$category = 'Déssin Animé';
+								break;
+							case 5:
+								$category = 'Cour Métrage';
+								break;
+		
+						}
+
 						echo '<ul class="list-group">';
 						echo '<li class="list-group-item"> Nom : '.$data->getName().'</li>';
-						echo '<li class="list-group-item"> Catégorie: '.$data->getCategory().'</li>';
+						echo '<li class="list-group-item"> Catégorie: '.$category.'</li>';
 						echo '<li class="list-group-item"> Genre : '.$data->getSubcategory().'</li>';
 						echo '<li class="list-group-item"> Saison : '.$data->getSeason().'/'.$data->getSmax().'</li>';
 						echo '<li class="list-group-item"> Episode : '.$data->getEpisode().'/'.$data->getEpmax().'</li>';

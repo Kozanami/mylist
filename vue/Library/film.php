@@ -1,4 +1,4 @@
-<div class="container-fluid col-md-8 text-center">
+<div class="container-fluid col-md-6 text-center">
   <a href="<?= WEBROOT.'Library/create' ?>"><button type="button" class="add-media btn btn-primary bg-perso btn-lg btn-block"><i class="fas fa-plus"></i> Ajouter un média</button></a>
 
   <table class="table table-striped table-dark mb-0">
@@ -29,22 +29,8 @@
         </td>
         <td class="d-lg-block d-none">
           <?php
-            for($i=0; $data->getEvaluation() > $i ; $i++)
-            {
-              if(($i % 2) !== 0)
-              {
-              ?>
-                <img class="star-rating" src="<?= WEBROOT ?>img/star-24px.svg" alt="étoile notation">
-              <?php
-              }
-            }
-            if(($i % 2) !== 0)
-            { 
-              ?>
-                <img class="star-rating" src="<?= WEBROOT ?>img/star_half-24px.svg" alt="étoile notation">
-              <?php
-            }
-          ?>
+              loadPartials('evaluation',$data->getEvaluation());
+            ?>
         </td>
          
         <td class="d-lg-none d-block">
@@ -58,5 +44,5 @@
       ?>
     </tbody>
   </table>
-<?php require('pagination.php'); ?>
+    <?php loadPartials('pagination'); ?>
 </div>

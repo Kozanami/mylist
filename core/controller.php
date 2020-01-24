@@ -47,7 +47,7 @@ class Controller {
 		// Vide la mémoire tempon et affecte le contenue dans $content
 		$content = ob_get_clean();
 		// Affiche la vue
-		require_once('vue/template/'.$template.'.php');
+		require_once('vue/_template/'.$template.'.php');
 		// Execution de saveUrl
 		$this->saveUrl($entity, $viewFile,$param);
 	}

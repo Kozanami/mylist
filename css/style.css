@@ -1,6 +1,7 @@
 :root{
     --color-perso: hsl(190, 96%, 31%);
     --color-perso1: hsl(190, 96%, 31%);
+    --dark-bg: hsl(0, 0%, 15%);
 }
 
 a:hover{
@@ -9,17 +10,18 @@ a:hover{
 
 body{
     margin: 0;
+    background: var(--dark-bg)!important;
 }
 
 header{
     height: 15vh;
-    background: url(../img/background5.png);
+    background: url(../img/background.png);
     opacity: 0.7;
 }
 
 #navBarMargin
 {
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
 }
 
 main{
