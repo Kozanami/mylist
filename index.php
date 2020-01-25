@@ -14,6 +14,7 @@
 	require_once('core/abstractEntity.php');
 	require_once('core/config.php');
 	require_once('core/globalMethod.php');
+	require_once('core/globalText.php');
 	
     if(!isset($_SESSION['id']) AND isset($_COOKIE['email']) AND isset($_COOKIE['password']) AND !empty($_COOKIE['email']) AND !empty($_COOKIE['password']))
     {
@@ -25,7 +26,8 @@
 		$_SESSION['email'] = htmlentities($_COOKIE['email']);
 		header('Location:'.WEBROOT.'Library/index');
         }
-    }
+	}
+	
 	/*ROUTAGE*/
 	// Page par default
 	if (isset($_GET['p'])) {
@@ -82,13 +84,16 @@
 		else 
 		{
 			// Page 404
-			echo 'erreur 404 (mauvaise action)';
+			logVar('danger','BadController');
+			redirectHome();
+
 		}
 	} 
 	else 
 	{
 		// Page 404
-		echo 'erreur 404 (mauvais controlleur)';
+		logVar('danger','BadController');
+		redirectHome();
 	}
 
 	

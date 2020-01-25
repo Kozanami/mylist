@@ -12,15 +12,27 @@
         return $data;
     }
 
+    // header location page principale
+    function redirectHome()
+    {
+        header('Location:'.WEBROOT.'Library/index');
+    }
+
     /////////////////////////////////////////////////
     //////////////       Module         /////////////
     /////////////////////////////////////////////////
 
     // Error Module
-    function logMessage($type, $message)
+    function logText($type, $message)
     {
         $_SESSION['logType'] = $type;
         $_SESSION['logMessage'] = $message;
+    }
+
+    function logVar($type, $message)
+    {
+        $_SESSION['logType'] = $type;
+        $_SESSION['logMessage'] = $GLOBALS['text'.$message];
     }
 
 ?>

@@ -1,14 +1,14 @@
 <?php 
 class CtrlLibrary extends Controller {
 
-	public function index($id = 1)
+	public function global($id,$mediaType = null,$pageName,$title = 'No title')
 	{
 		if($id == 0 OR $id < 1)
 		{
 			$id = 1;
 		}
 		
-		$d['title'] = 'Bibliothèque';
+		$_SESSION['title'] = $title;
 
 		$entityByPage = $_SESSION['entityByPage'];
 
@@ -19,7 +19,14 @@ class CtrlLibrary extends Controller {
 			$currentPage = $id;
 
 			$firstEntry = ($currentPage-1)*$entityByPage;
-			$countmax = $this->DaoLibrary->countLibrary($userid);
+			if($mediaType != null)
+			{
+				$countmax = $this->DaoLibrary->countLibrary($userid,$mediaType);
+			}
+			else
+			{
+				$countmax = $this->DaoLibrary->countLibrary($userid);
+			}
 
 			if( $countmax > 0 )
 			{
@@ -39,267 +46,53 @@ class CtrlLibrary extends Controller {
 				$_SESSION['pageID'] = $id;
 			}
 
-			$_SESSION['pageName'] = 'index';
-			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry);
+			$_SESSION['pageName'] = $pageName;
+			if($mediaType != null)
+			{
+				$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,$mediaType);
+			}
+			else
+			{
+				$d['library'] = $this->DaoLibrary->read($userid,$firstEntry);
+			}
+
 			$this->set($d);
 			$this->render('default','Library',$_SESSION['pageName'], $id);				
 		} 
 		else 
 		{
-			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
-			$this->set($d); 
+			logVar('danger','RequireAuth');
 			$this->render('default','User','logIn');
 		}
+	}
+
+	public function index($id = 1)
+	{
+		$this->global($id,null,'index','Bibliothèque');
 	}
 
 	public function film($id = 1)
 	{
-		if($id == 0 OR $id < 1)
-		{
-			$id = 1;
-		}
-		$entityByPage = $_SESSION['entityByPage'];
-
-		$d['title'] = 'Bibliothèque des Film';
-
-		if (isset($_SESSION['id'])) {
-			$userid = $_SESSION['id'];
-			$this->loadDao('Library');
-
-			$currentPage = $id;
-
-			$firstEntry = ($currentPage-1)*$entityByPage;
-			$countmax = $this->DaoLibrary->countLibrary($userid,1);
-
-			if( $countmax > 0 )
-			{
-				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
-			}
-			else
-			{
-				$_SESSION['pageMax'] = 1;
-			}
-
-			if($id > $_SESSION['pageMax'])
-			{
-				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
-			}
-			else
-			{
-				$_SESSION['pageID'] = $id;
-			}
-
-			$_SESSION['pageName'] = 'film';
-			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,1);
-			$this->set($d);
-			$this->render('default','Library','film', $id);				
-		} 
-		else 
-		{
-			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
-			$this->set($d); 
-			$this->render('default','User','logIn');
-		}
+		$this->global($id,1,'film','Les Films');
 	}
 
 	public function serie($id = 1)
 	{
-		if($id == 0 OR $id < 1)
-		{
-			$id = 1;
-		}
-		$entityByPage = $_SESSION['entityByPage'];
-		
-		$d['title'] = 'Bibliothèque des Série';
-
-		if (isset($_SESSION['id'])) {
-			$userid = $_SESSION['id'];
-			$this->loadDao('Library');
-
-			$currentPage = $id;
-
-			$firstEntry = ($currentPage-1)*$entityByPage;
-			$countmax = $this->DaoLibrary->countLibrary($userid,2);
-
-			if( $countmax > 0 )
-			{
-				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
-			}
-			else
-			{
-				$_SESSION['pageMax'] = 1;
-			}
-
-			if($id > $_SESSION['pageMax'])
-			{
-				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
-			}
-			else
-			{
-				$_SESSION['pageID'] = $id;
-			}
-
-			$_SESSION['pageName'] = 'serie';
-			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,2);
-			$this->set($d);
-			$this->render('default','Library','serie', $id);				
-		} 
-		else 
-		{
-			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
-			$this->set($d); 
-			$this->render('default','User','logIn');
-		}
+		$this->global($id,2,'serie','Les Série');
 	}
 
 	public function anime($id = 1)
 	{
-		if($id == 0 OR $id < 1)
-		{
-			$id = 1;
-		}
-		$entityByPage = $_SESSION['entityByPage'];
-		
-		$d['title'] = 'Bibliothèque des Animés';
-
-		if (isset($_SESSION['id'])) {
-			$userid = $_SESSION['id'];
-			$this->loadDao('Library');
-
-			$currentPage = $id;
-
-			$firstEntry = ($currentPage-1)*$entityByPage;
-			$countmax = $this->DaoLibrary->countLibrary($userid,3);
-
-			if( $countmax > 0 )
-			{
-				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
-			}
-			else
-			{
-				$_SESSION['pageMax'] = 1;
-			}
-
-			if($id > $_SESSION['pageMax'])
-			{
-				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
-			}
-			else
-			{
-				$_SESSION['pageID'] = $id;
-			}
-
-			$_SESSION['pageName'] = 'anime';
-			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,3);
-			$this->set($d);
-			$this->render('default','Library',$_SESSION['pageName'], $id);				
-		} 
-		else 
-		{
-			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
-			$this->set($d); 
-			$this->render('default','User','logIn');
-		}
+		$this->global($id,3,'anime','Les Animés');
 	}
 
 	public function dessinAnime($id = 1)
 	{
-		if($id == 0 OR $id < 1)
-		{
-			$id = 1;
-		}
-		$entityByPage = $_SESSION['entityByPage'];
-		
-		$d['title'] = 'Bibliothèque des Déssin Animés';
-
-		if (isset($_SESSION['id'])) {
-			$userid = $_SESSION['id'];
-			$this->loadDao('Library');
-
-			$currentPage = $id;
-
-			$firstEntry = ($currentPage-1)*$entityByPage;
-			$countmax = $this->DaoLibrary->countLibrary($userid,4);
-
-			if( $countmax > 0 )
-			{
-				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
-			}
-			else
-			{
-				$_SESSION['pageMax'] = 1;
-			}
-
-			if($id > $_SESSION['pageMax'])
-			{
-				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
-			}
-			else
-			{
-				$_SESSION['pageID'] = $id;
-			}
-
-			$_SESSION['pageName'] = 'dessinAnime';
-			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,4);
-			$this->set($d);
-			$this->render('default','Library',$_SESSION['pageName'], $id);				
-		} 
-		else 
-		{
-			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
-			$this->set($d); 
-			$this->render('default','User','logIn');
-		}
+		$this->global($id,4,'dessinAnime','Les Déssin Animés');
 	}
-
 	public function courtMetrage($id = 1)
 	{
-		if($id == 0 OR $id < 1)
-		{
-			$id = 1;
-		}
-		$entityByPage = $_SESSION['entityByPage'];
-		
-		$d['title'] = 'Bibliothèque des court métrages';
-
-		if (isset($_SESSION['id'])) {
-			$userid = $_SESSION['id'];
-			$this->loadDao('Library');
-
-			$currentPage = $id;
-
-			$firstEntry = ($currentPage-1)*$entityByPage;
-			$countmax = $this->DaoLibrary->countLibrary($userid,5);
-
-			if( $countmax > 0 )
-			{
-				$_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
-			}
-			else
-			{
-				$_SESSION['pageMax'] = 1;
-			}
-
-			if($id > $_SESSION['pageMax'])
-			{
-				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
-			}
-			else
-			{
-				$_SESSION['pageID'] = $id;
-			}
-
-			$_SESSION['pageName'] = 'courtMetrage';
-			$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,5);
-			$this->set($d);
-			$this->render('default','Library',$_SESSION['pageName'], $id);				
-		} 
-		else 
-		{
-			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
-			$this->set($d); 
-			$this->render('default','User','logIn');
-		}
+		$this->global($id,5,'courtMetrage','Les court Métrage');
 	}
 
 	public function edit($id = null)
@@ -332,7 +125,7 @@ class CtrlLibrary extends Controller {
 				$library = new Library($name,$category,$subcategory,$season,$smax,$episode,$epmax,$tag,$evaluation,$note,$userid);
 				$this->DaoLibrary->update($library,$id);
 
-				logMessage('sucess','Envoie effectuer');
+				logVar('sucess','Envoie effectuer');
 				$this->set($d);
 				if(isset($_SESSION['pageName']))
 				{
@@ -359,8 +152,7 @@ class CtrlLibrary extends Controller {
 		} 
 		else
 		{
-		$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
-		$this->set($d); 
+		logVar('danger','RequireAuth');
 		$this->render('default','User','logIn');
 		}
 	}
@@ -393,9 +185,26 @@ class CtrlLibrary extends Controller {
 				$library = new Library($name,$category,$subcategory,$season,$smax,$episode,$epmax,$tag,$evaluation,$note,$userid);
 				$this->DaoLibrary->create($library);
 
-				logMessage('alert','Envoie effectuer');
+				switch($category)
+				{
+					case 1:
+						$textCategory = 'Le Film';
+						break;
+					case 2:
+						$textCategory = 'La Série';
+						break;
+					case 3:
+						$textCategory = 'L\'Anime';
+						break;
+					case 4:
+						$textCategory = 'Le Déssin Animé';
+						break;
+					case 5:
+						$textCategory = 'Le Cour Métrage';
+						break;
+				}
 
-				$this->set($d);
+				logVar('alert', $textCategory.' a bien été ajouter à votre liste');
 
 				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/'.$id);
 				
@@ -407,7 +216,7 @@ class CtrlLibrary extends Controller {
 		} 
 		else
 		{
-		$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
+		logVar('danger','RequireAuth');
 		$this->set($d);
 		$this->render('default','User','logIn');
 	}
@@ -433,7 +242,7 @@ class CtrlLibrary extends Controller {
 			
 			$d['title'] = 'Détails';
 
-			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
+			logVar('danger','RequireAuth');
 			$this->set($d); 
 			$this->render('default','User','logIn');
 		}
@@ -445,15 +254,14 @@ class CtrlLibrary extends Controller {
 			$this->loadDao('Library');
 			$this->DaoLibrary->delete($id);
 
-			logMessage('danger','Le média a bien était supprimer de la liste');
+			logVar('danger','Le média a bien était supprimer de la liste');
 
-			header('Location:'.WEBROOT.'Library/index');
+			redirectHome();
 		}
 		else 
 		{
 			$d['title'] = 'Login';
-
-			$d['log'] = '<div class="alert alert-danger" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
+			logVar('danger','RequireAuth');
 			$this->set($d); 
 			$this->render('default','User','logIn');	
 		}

@@ -68,8 +68,8 @@ class CtrlUser extends Controller {
 					}
 					else
 					{
-						setcookie('email','',time()-3600);
-						setcookie('password','',time()-3600);
+						setcookie('email','',time()-3600,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+						setcookie('password','',time()-3600,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
 					}
 
 					header('Location:'.WEBROOT.'Library/index');
