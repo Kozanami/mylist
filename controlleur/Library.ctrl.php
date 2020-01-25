@@ -1,8 +1,10 @@
 <?php 
 class CtrlLibrary extends Controller {
 
-	public function global($id,$mediaType = null,$pageName,$title = 'No title')
+	public function global($id,$mediaType,$pageName,$title = 'No title')
 	{
+		$_SESSION['pageName'] = $pageName;
+
 		if($id == 0 OR $id < 1)
 		{
 			$id = 1;
@@ -45,8 +47,6 @@ class CtrlLibrary extends Controller {
 			{
 				$_SESSION['pageID'] = $id;
 			}
-
-			$_SESSION['pageName'] = $pageName;
 			if($mediaType != null)
 			{
 				$d['library'] = $this->DaoLibrary->read($userid,$firstEntry,$mediaType);
@@ -61,6 +61,7 @@ class CtrlLibrary extends Controller {
 		} 
 		else 
 		{
+			$_SESSION['title'] = 'Login';
 			logVar('danger','RequireAuth');
 			$this->render('default','User','logIn');
 		}
@@ -97,17 +98,11 @@ class CtrlLibrary extends Controller {
 
 	public function edit($id = null)
 	{
-		$d['title'] = 'Modifier';
+		$_SESSION['title'] = 'Modifier';
 		if (isset($_SESSION['id'])) {
 			if (!empty($this->input)) {
 
 				$this->loadDao('Library');
-
-				// Vérif regexp pour l'email
-
-				// Vérif regexp mot de passe
-
-				// Vérif si email present dans la bdd 
 				
 				$name = htmlentities($this->input['name']);
 				$category = htmlentities($this->input['category']);
@@ -125,15 +120,14 @@ class CtrlLibrary extends Controller {
 				$library = new Library($name,$category,$subcategory,$season,$smax,$episode,$epmax,$tag,$evaluation,$note,$userid);
 				$this->DaoLibrary->update($library,$id);
 
-				logVar('sucess','Envoie effectuer');
-				$this->set($d);
+				logVar('success','SuccessForm');
 				if(isset($_SESSION['pageName']))
 				{
 					header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName']);
 				}
 				else
 				{
-					header('Location:'.WEBROOT.'Library/index/');
+					header('Location:'.WEBROOT.'Library/index');
 				}
 			}
 			else 
@@ -141,12 +135,14 @@ class CtrlLibrary extends Controller {
 				$this->loadDao('Library');
 				$userid = htmlentities($_SESSION['id']);
 				$d['library'] = $this->DaoLibrary->readOne($id);
-
-				foreach($d['library'] as $key => $data){}
-		
-				$d['title'] = 'Modifier : '.$data->getName();
 				$d['id'] = $id;
 				$this->set($d);
+
+				// on foreach library pour $data->getName()
+				foreach($d['library'] as $data){
+					$_SESSION['title'] = 'Modifier : '.$data->getName();
+				}
+				
 				$this->render('default','Library','edit', $id);
 			}
 		} 
@@ -157,9 +153,10 @@ class CtrlLibrary extends Controller {
 		}
 	}
 
-	public function create($id = 1) {
+	public function create($id = 1)
+	{
 
-		$d['title'] = 'Ajouter';
+		$_SESSION['title'] = 'Ajouter';
 
 		if (isset($_SESSION['id'])) {
 			if (!empty($this->input)) {
@@ -203,11 +200,9 @@ class CtrlLibrary extends Controller {
 						$textCategory = 'Le Cour Métrage';
 						break;
 				}
-
-				logVar('alert', $textCategory.' a bien été ajouter à votre liste');
-
-				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/'.$id);
+				logVar('sucess','SuccessForm');
 				
+				//header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/'.$id);
 			}
 			else 
 			{
@@ -216,14 +211,14 @@ class CtrlLibrary extends Controller {
 		} 
 		else
 		{
-		logVar('danger','RequireAuth');
-		$this->set($d);
-		$this->render('default','User','logIn');
-	}
+			$_SESSION['title'] = 'Login';
+			logVar('danger','RequireAuth');
+			$this->render('default','User','logIn');
+		}
 	}
 
-	public function detail($id){
-
+	public function detail($id)
+	{
 		if (isset($_SESSION['id'])) {
 			$userid = $_SESSION['id'];
 			$this->loadDao('Library');
@@ -232,37 +227,34 @@ class CtrlLibrary extends Controller {
 
 			foreach($d['library'] as $key => $data){}
 
-			$tempTitle = $data->getName();
-
-			$d['title'] = $tempTitle;
+			$_SESSION['title'] = $data->getName();
 
 			$this->set($d);
 			$this->render('default','Library','detail',$id);
-		} else {
+		}
+		else 
+		{
 			
-			$d['title'] = 'Détails';
-
+			$_SESSION['title'] = 'Login';
 			logVar('danger','RequireAuth');
-			$this->set($d); 
 			$this->render('default','User','logIn');
 		}
 	}
 	
-	public function delete($id){
+	public function delete($id)
+	{
 		if (isset($_SESSION['id'])) 
 		{
 			$this->loadDao('Library');
 			$this->DaoLibrary->delete($id);
 
-			logVar('danger','Le média a bien était supprimer de la liste');
-
+			logVar('danger','DeleteLibrary');
 			redirectHome();
 		}
 		else 
 		{
-			$d['title'] = 'Login';
+			$_SESSION['title'] = 'Login';
 			logVar('danger','RequireAuth');
-			$this->set($d); 
 			$this->render('default','User','logIn');	
 		}
 	}

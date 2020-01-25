@@ -13,7 +13,7 @@
 
         <!-- Header content -->
         <header>
-
+        <?php  var_dump($_SESSION['pageName']); ?>
         </header>
 
         <!-- Navbar content -->
