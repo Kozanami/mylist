@@ -3,13 +3,11 @@ class CtrlLibrary extends Controller {
 
 	public function global($id,$mediaType,$pageName,$title = 'No title')
 	{
-		$_SESSION['pageName'] = $pageName;
-
 		if($id == 0 OR $id < 1)
 		{
 			$id = 1;
 		}
-		
+		$_SESSION['pageName'] = $pageName;
 		$_SESSION['title'] = $title;
 
 		$entityByPage = $_SESSION['entityByPage'];
@@ -41,7 +39,7 @@ class CtrlLibrary extends Controller {
 
 			if($id > $_SESSION['pageMax'])
 			{
-				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/');
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName']);
 			}
 			else
 			{
@@ -153,7 +151,7 @@ class CtrlLibrary extends Controller {
 		}
 	}
 
-	public function create($id = 1)
+	public function create()
 	{
 
 		$_SESSION['title'] = 'Ajouter';
@@ -202,7 +200,7 @@ class CtrlLibrary extends Controller {
 				}
 				logVar('sucess','SuccessForm');
 				
-				//header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName'].'/'.$id);
+				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName']);
 			}
 			else 
 			{

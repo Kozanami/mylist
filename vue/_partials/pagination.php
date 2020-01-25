@@ -7,7 +7,7 @@
             $pageName = $_SESSION['pageName'];
             $pageMax = $_SESSION['pageMax'];
             unset($_SESSION['pageID']);
-            unset($_SESSION['pageName']);
+            unset($_SESSION['pageMax']);
 
             if($pageId-1 >= 1)
             {
