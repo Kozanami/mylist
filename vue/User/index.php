@@ -1,10 +1,16 @@
 <?php 
-if (isset($user)) {
-	echo '<ul>';
-	echo '<li><img src="'.WEBROOT.'img/'.$user->getAvatar().'"></li>';
-	echo '<li> Nom : '.$user->getLastName().'</li>';
-	echo '<li> Prénom : '.$user->getFirstName().'</li>';
-	echo '<li> Email : '.$user->getEmail().'</li>';
-	echo '</ul>';
-}
+	if (isset($user)) 
+	{
+?>
+		<div class="card" style="width: 18rem;">
+		<img src="<?php WEBROOT.'img/'.$user->getAvatar() ?>" alt="..." class="card-img-top">
+		<div class="card-body">
+			<h5 class="card-title">Mon Profil</h5>
+			<li> Nom : <?php $user->getLastName(); ?></li>
+			<?php $user->getFirstName(); ?>
+			<?php $user->getEmail(); ?>
+		</div>
+		</div>
+<?php 
+	}
 ?>

@@ -3,4 +3,5 @@
     $textBadController = '[ Erreur 404 controller not found ] : vous avez été redirigé sur la page principale';
     $textSuccessForm = 'votre formulaire a été envoyé avec succès';
     $textDeleteLibrary = 'Votre demande de suppression de la liste a été envoyé avec succès';
+    $textEmailDuplicate = 'Cet Email est déjà enregistrer dans notre base';
 ?>

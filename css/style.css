@@ -11,10 +11,6 @@ a:hover{
 body{
     margin: 0;
     background: var(--dark-bg)!important;
-}
-
-h1
-{
     color: #fff;
 }
 

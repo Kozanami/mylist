@@ -2,6 +2,7 @@
 require_once('modele/User.class.php');
 
 class DaoUser {
+
     public function create($user) {
         DB::request('INSERT INTO user (email,password) VALUES (?,?)', array($user->getEmail(),$user->getPassword()));
         $user->setId(DB::lastId());

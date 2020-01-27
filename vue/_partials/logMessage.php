@@ -1,6 +1,10 @@
 <?php 
+    if(!isset($_SESSION['logContainerWidth']) OR $_SESSION['logContainerWidth'] == null)
+    {
+        $_SESSION['logContainerWidth'] = 6;
+    }
     if (isset($_SESSION['logMessage']) AND isset($_SESSION['logType'])) {
-        echo '<div class="container-fluid col-md-6 text-center">';
+        echo '<div class="container-fluid col-md-'.$_SESSION['logContainerWidth'].' text-center">';
         if($_SESSION['logType'] == 'alert'){
             echo'<div class="alert alert-warning" role="alert">';
         }

@@ -1,11 +1,6 @@
 <div class="container-fluid col-auto d-flex justify-content-center text-center">
 	<form action="<?= WEBROOT ?>User/signIn" method="POST" class="content col-4">
 		<h1 class="text-center">Inscription</h1>
-			<?php 
-				if (isset($log)) {
-					echo $log;
-				}
-			?>
 		<div class="form-group">
 			<label for="exampleInputEmail1">Email</label>
 			<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

@@ -13,16 +13,13 @@
 
         <!-- Header content -->
         <header>
-        <?php var_dump($_SESSION['pageName']); ?>
+        
         </header>
 
         <!-- Navbar content -->
         <?php loadPartials('navBar'); ?>
-        
-        <main class="container-fluid">
-
         <?php loadPartials('logMessage'); ?>
-
+        <main class="container-fluid">
         <?= $content ?>
         </main>
 

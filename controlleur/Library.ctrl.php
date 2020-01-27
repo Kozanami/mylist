@@ -1,7 +1,7 @@
 <?php 
 class CtrlLibrary extends Controller {
 
-	public function global($id,$mediaType,$pageName,$title = 'No title')
+	private function global($id,$mediaType,$pageName,$title = 'No title')
 	{
 		if($id == 0 OR $id < 1)
 		{
@@ -198,7 +198,7 @@ class CtrlLibrary extends Controller {
 						$textCategory = 'Le Cour Métrage';
 						break;
 				}
-				logVar('sucess','SuccessForm');
+				logVar('success','SuccessForm');
 				
 				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName']);
 			}

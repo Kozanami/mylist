@@ -27,18 +27,26 @@ class CtrlUser extends Controller {
 			// Vérif si email present dans la bdd 
 
 			$email = htmlentities($this->input['email']);
-			$password = htmlentities($this->input['password']);
-			$password = password_hash($password, PASSWORD_DEFAULT);
+			$user = $this->DaoUser->readByEmail($email);
+			if($email != $user->getEmail())
+			{
+				$password = htmlentities($this->input['password']);
+				$password = password_hash($password, PASSWORD_DEFAULT);
 
-			$user = new User($email,$password);
+				$user = new User($email,$password);
 
-			$this->DaoUser->create($user);
+				$this->DaoUser->create($user);
 
-			$d['log'] = '<div class="alert alert-success" role="alert">Inscription réussie !</div>';
-			$this->set($d);
+				$d['log'] = '<div class="alert alert-success" role="alert">Inscription réussie !</div>';
+				$this->set($d);
 
-			header('Location:'.WEBROOT.'Library/index');
-
+				header('Location:'.WEBROOT.'Library/index');
+			}
+			else
+			{
+				logVar('danger','EmailDuplicate',4);
+				$this->render('default','User','signIn');
+			}
 		} else {
 			$this->render('default','User','signIn');
 		}

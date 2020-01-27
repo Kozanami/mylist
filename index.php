@@ -1,13 +1,11 @@
 <?php session_start();
-
 	// WEBROOT => dossier du projet de la racine serveur
 	define('WEBROOT',str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 	// ROOT => dossier du projet de la racine du disque dur
 	define('ROOT',str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 
 	define('SERVERNAME',basename(__DIR__));
-
-
+	
 	// Init 
 	require_once('core/bdd.php');
 	require_once('core/controller.php');
@@ -16,16 +14,16 @@
 	require_once('core/globalMethod.php');
 	require_once('core/globalText.php');
 	
-    if(!isset($_SESSION['id']) AND isset($_COOKIE['email']) AND isset($_COOKIE['password']) AND !empty($_COOKIE['email']) AND !empty($_COOKIE['password']))
-    {
-        if(DB::authCheck($_COOKIE['email'],$_COOKIE['password']))
-        {
-        setcookie('email',$_COOKIE['email'],time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
-        setcookie('password',$_COOKIE['password'],time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
-        $_SESSION['id'] = htmlentities(DB::getId($_COOKIE['email'],$_COOKIE['password']));
-		$_SESSION['email'] = htmlentities($_COOKIE['email']);
-		header('Location:'.WEBROOT.'Library/index');
-        }
+	if(!isset($_SESSION['id']) AND isset($_COOKIE['email']) AND isset($_COOKIE['password']) AND !empty($_COOKIE['email']) AND !empty($_COOKIE['password']))
+	{
+		if(DB::authCheck($_COOKIE['email'],$_COOKIE['password']))
+		{
+			setcookie('email',$_COOKIE['email'],time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+			setcookie('password',$_COOKIE['password'],time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+			$_SESSION['id'] = htmlentities(DB::getId($_COOKIE['email'],$_COOKIE['password']));
+			$_SESSION['email'] = htmlentities($_COOKIE['email']);
+			header('Location:'.WEBROOT.'Library/index');
+		}
 	}
 	
 	/*ROUTAGE*/
