@@ -1,9 +1,5 @@
 <div class="container-fluid col-md-6 text-center">
-  <a href="<?= WEBROOT.'Library/create' ?>"><button type="button" class="add-media btn btn-primary bg-perso btn-lg btn-block"><i class="fas fa-plus"></i> Ajouter un média</button></a>
-
-  <?php loadPartials('filterTabs'); ?>
-  
-  <table class="table table-striped table-dark mb-0">
+<?php loadPartials('libraryTop'); ?>
     <thead>
       <tr>
         <th scope="col">Nom</th>

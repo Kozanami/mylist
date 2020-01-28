@@ -1,8 +1,8 @@
 
 <div class="row justify-content-center">
 	<div class="col-md-4">
-		<div class="card">
-			<div class="card-body">
+		<div class="card bg-secondary">
+			<div class="card-body bg-dark">
 				<?php 
 					if (isset($library)) {
 						foreach($library as $key => $data){
@@ -28,19 +28,19 @@
 						}
 
 						echo '<ul class="list-group">';
-						echo '<li class="list-group-item"> Nom : '.$data->getName().'</li>';
-						echo '<li class="list-group-item"> Catégorie: '.$category.'</li>';
-						echo '<li class="list-group-item"> Genre : '.$data->getSubcategory().'</li>';
-						echo '<li class="list-group-item"> Saison : '.$data->getSeason().'/'.$data->getSmax().'</li>';
-						echo '<li class="list-group-item"> Episode : '.$data->getEpisode().'/'.$data->getEpmax().'</li>';
+						echo '<li class="list-group-item bg-secondary"> Nom : '.$data->getName().'</li>';
+						echo '<li class="list-group-item bg-secondary"> Catégorie: '.$category.'</li>';
+						echo '<li class="list-group-item bg-secondary"> Genre : '.$data->getSubcategory().'</li>';
+						echo '<li class="list-group-item bg-secondary"> Saison : '.$data->getSeason().'/'.$data->getSmax().'</li>';
+						echo '<li class="list-group-item bg-secondary"> Episode : '.$data->getEpisode().'/'.$data->getEpmax().'</li>';
 						$tabTag = explode(",", $data->getTag());
-						echo '<li class="list-group-item"> Tags : ';
+						echo '<li class="list-group-item bg-secondary"> Tags : ';
 						foreach($tabTag as $tag){
 							echo '<button class="badge badge-secondary m-1">'.$tag.'</button>';
 						}
-						echo  '</li class="list-group-item">';
-						echo '<li class="list-group-item"> Note : '.$data->getEvaluation().'/10</li>';
-						echo '<li class="list-group-item"> Mémo : '.$data->getNote().'</li>';
+						echo  '</li class="list-group-item bg-secondary">';
+						echo '<li class="list-group-item bg-secondary"> Note : '.$data->getEvaluation().'/10</li>';
+						echo '<li class="list-group-item bg-secondary"> Mémo : '.$data->getNote().'</li>';
 						?>
 
 						<?php

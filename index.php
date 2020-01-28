@@ -1,4 +1,6 @@
 <?php session_start();
+
+	define('WEBROOTER',explode("/", $_SERVER['REQUEST_URI'])[1]);
 	// WEBROOT => dossier du projet de la racine serveur
 	define('WEBROOT',str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 	// ROOT => dossier du projet de la racine du disque dur

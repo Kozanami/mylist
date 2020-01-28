@@ -1,6 +1,7 @@
 <?php 
 
 class CtrlUser extends Controller {
+
 	public function index() {
 		$this->loadDao('User');
 
@@ -16,19 +17,120 @@ class CtrlUser extends Controller {
 
 	}
 
-	public function signIn($id = 1) {
+	public function edit()
+	{
+		if (isset($_SESSION['id'])) {
+			if (!empty($this->input)) {
+				$this->loadDao('User');
+
+				$email = htmlentities($this->input['email']);
+				$firstname = htmlentities($this->input['firstname']);
+				$lastname = htmlentities($this->input['lastname']);
+				if(isset($this->input['avatar'])){
+					$avatar = htmlentities($this->input['avatar']);
+				}
+				if(isset($this->input['newpassword'])){
+					$newpassword = htmlentities($this->input['newpassword']);
+				}
+				$password = htmlentities($this->input['password']);
+				$password = password_hash($password, PASSWORD_DEFAULT);
+
+				$user = $this->DaoUser->readByEmail($email);
+
+				if($user->getPassword() == $password)
+				{
+					$user->setFirstName($firstname);
+					$user->setLastName($lastname);
+					$user->setEmail($email);
+					if(isset($newpassword)){
+						$user->setPassword($newpassword);
+					}
+					else
+					{
+						$user->setPassword($password);
+					}
+					if(isset($avatar)){
+						$user->setAvatar($avatar);
+					}
+					$user->setId($user->getId());
+
+				$this->DaoLibrary->update($user);
+
+				logVar('success','SuccessForm');
+				header('Location:'.WEBROOT.'Library/index');
+				}
+				else
+				{
+					logVar('alert','PasswordError');
+					$this->render('default','User','index');
+				}
+			}
+			else 
+			{	
+				logVar('alert','InputEmpty');
+				$this->render('default','User','index');
+			}
+		} 
+		else
+		{
+		logVar('danger','RequireAuth');
+		$this->render('default','User','logIn');
+		}
+	}
+
+	public function delete()
+	{
+		if (isset($_SESSION['id'])) {
+			$id = $_SESSION['id'];
+			$this->loadDao('User');
+			$this->DaoUser->delete($id);
+			setcookie('email','',time()-3600,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+			setcookie('password','',time()-3600,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+			session_unset();
+			session_destroy();
+			logVar('success','DeleteAccount', 4);
+			header('Location:'.WEBROOT.'User/signIn');
+		} else {
+			logVar('danger','RequireAuth');
+			$this->render('default','User','signIn');
+		}
+	}
+
+	public function signIn() {
+		$_SESSION['title'] = 'inscription';
 		if (!empty($this->input)) {
 			$this->loadDao('User');
 
-			// Vérif regexp pour l'email
-
-			// Vérif regexp mot de passe
-
-			// Vérif si email present dans la bdd 
-
 			$email = htmlentities($this->input['email']);
 			$user = $this->DaoUser->readByEmail($email);
-			if($email != $user->getEmail())
+			
+			if($user)
+			{
+				if($email != $user->getEmail())
+				{
+				
+					$password = htmlentities($this->input['password']);
+					$password = password_hash($password, PASSWORD_DEFAULT);
+
+					$user = new User($email,$password);
+
+					$this->DaoUser->create($user);
+
+					logVar('success','SubcrireSuccess',4);
+
+					$_SESSION['id'] = htmlentities($user->getId());
+					$_SESSION['email'] = htmlentities($user->getEmail());
+
+					header('Location:'.WEBROOT.'Library/index');
+				
+				}
+				else
+				{
+					logVar('danger','EmailDuplicate',4);
+					$this->render('default','User','signIn');
+				}
+			}
+			else
 			{
 				$password = htmlentities($this->input['password']);
 				$password = password_hash($password, PASSWORD_DEFAULT);
@@ -37,23 +139,22 @@ class CtrlUser extends Controller {
 
 				$this->DaoUser->create($user);
 
-				$d['log'] = '<div class="alert alert-success" role="alert">Inscription réussie !</div>';
-				$this->set($d);
+				logVar('success','SubcrireSuccess',4);
+
+				$_SESSION['id'] = htmlentities($user->getId());
+				$_SESSION['email'] = htmlentities($user->getEmail());
 
 				header('Location:'.WEBROOT.'Library/index');
 			}
-			else
-			{
-				logVar('danger','EmailDuplicate',4);
-				$this->render('default','User','signIn');
-			}
-		} else {
+		} 
+		else
+		{
 			$this->render('default','User','signIn');
 		}
 	}
 
-	public function logIn($id = 1) {
-
+	public function logIn() {
+		$_SESSION['title'] = 'connexion';
 		if (!empty($this->input)) {
 			$this->loadDao('User');
 
@@ -84,7 +185,7 @@ class CtrlUser extends Controller {
 				} else {
 					$d['log'] = '<div class="alert alert-danger" role="alert">Email ou mot de passe incorrect</div>';
 					$this->set($d);
-					$this->render('default','Library','index', $id);
+					$this->render('default','Library','index');
 				}
 			} else {
 				$d['log'] = '<div class="alert alert-danger" role="alert">Email ou mot de passe incorrect</div>';
