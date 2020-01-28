@@ -20,7 +20,16 @@ class CtrlUser extends Controller {
 	public function edit()
 	{
 		if (isset($_SESSION['id'])) {
-			if (!empty($this->input)) {
+			if (
+					!empty($this->input['email']) 
+					&& 
+					!empty($this->input['firstname'])
+					&&
+					!empty($this->input['lastname'])
+					&&
+					!empty($this->input['password'])
+				) 
+			{
 				$this->loadDao('User');
 
 				$email = htmlentities($this->input['email']);
@@ -29,46 +38,61 @@ class CtrlUser extends Controller {
 				if(isset($this->input['avatar'])){
 					$avatar = htmlentities($this->input['avatar']);
 				}
-				if(isset($this->input['newpassword'])){
+				if(!empty($this->input['newpassword']))
+				{
 					$newpassword = htmlentities($this->input['newpassword']);
 				}
-				$password = htmlentities($this->input['password']);
-				$password = password_hash($password, PASSWORD_DEFAULT);
-
+				$passInput = htmlentities($this->input['password']);
+				
 				$user = $this->DaoUser->readByEmail($email);
+				$passUser = $user->getPassword();
 
-				if($user->getPassword() == $password)
+				if(password_verify($passInput, $passUser))
 				{
 					$user->setFirstName($firstname);
 					$user->setLastName($lastname);
 					$user->setEmail($email);
-					if(isset($newpassword)){
-						$user->setPassword($newpassword);
+					
+					if(isset($newpassword))
+					{
+						// si les mots de passe ne sont pas identique
+						if(!password_verify($newpassword, $passUser))
+						{
+							$newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+							$user->setPassword($newpassword);
+						}
+						else
+						{
+							logVar('alert','NewPasswordError');
+							header('Location: '.WEBROOT.'User/index');
+							// on met un exit pour stopper le code car pour une raison inconnue il continnue
+							exit();
+						}
 					}
 					else
 					{
-						$user->setPassword($password);
+						$user->setPassword($passUser);
 					}
 					if(isset($avatar)){
 						$user->setAvatar($avatar);
 					}
+					$user->setArchive(0);
 					$user->setId($user->getId());
+					$this->DaoUser->update($user);
 
-				$this->DaoLibrary->update($user);
-
-				logVar('success','SuccessForm');
-				header('Location:'.WEBROOT.'Library/index');
+					logVar('success','SuccessForm');
+					header('Location:'.WEBROOT.'User/index');
 				}
 				else
 				{
 					logVar('alert','PasswordError');
-					$this->render('default','User','index');
+					header('Location:'.WEBROOT.'User/index');
 				}
 			}
 			else 
 			{	
 				logVar('alert','InputEmpty');
-				$this->render('default','User','index');
+				header('Location:'.WEBROOT.'User/index');
 			}
 		} 
 		else

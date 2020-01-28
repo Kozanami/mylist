@@ -1,7 +1,5 @@
 <div class="container-fluid col-md-6 text-center">
 <?php loadPartials('libraryTop'); ?>
-
-  <table class="table table-striped table-dark mb-0">
     <thead>
       <tr>
         <th scope="col">Nom</th>

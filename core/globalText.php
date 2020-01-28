@@ -5,7 +5,8 @@
     $textDeleteLibrary = "Votre demande de suppression de la liste a été envoyé avec succès";
     $textEmailDuplicate = "Cet Email est déjà enregistrer dans notre base";
     $textInputEmpty = "Certains champs n'ont pas était remplit";
-    $textPasswordError = "Les mots de passes ne sont pas identique !";
+    $textPasswordError = "Mot de passe incorrecte !";
+    $textNewPasswordError = "Les deux mots de passes ne doivent pas être identique !";
     $textDeleteAccount = "Votre compte à bien était supprimer !";
     $textSubcrireSuccess = "Inscription réussie !";
 ?>
