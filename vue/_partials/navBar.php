@@ -94,10 +94,11 @@
                             ';
                         }
                     ?>
-                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <?php if($data->getFirstName() != '' AND $data->getLastName() != ''){ echo '<div class="topbar-divider d-none d-sm-block"></div>'; } ?>
                     <!-- Nav Item - User Information -->
                     <li class="nav-item pr-1">
                         <a class="nav-link" href="<?= WEBROOT ?>User/index">
+                            
                            <span class="mr-2 d-lg-inline text-gray-400 small font-weight-normal topbar-text-size"><?= $data->getFirstName().' '.$data->getLastName() ?></span>
                             <img src="<?= WEBROOT.'img/avatar/'.$data->getAvatar(); ?>" alt="image de profil" class="img-profile rounded-circle">
                         </a>

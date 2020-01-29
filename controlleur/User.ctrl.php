@@ -139,7 +139,7 @@ class CtrlUser extends Controller {
 
 					$this->DaoUser->create($user);
 
-					logVar('success','SubcrireSuccess',4);
+					logVar('success','SubcrireSuccess',6);
 
 					$_SESSION['id'] = htmlentities($user->getId());
 					$_SESSION['email'] = htmlentities($user->getEmail());
