@@ -74,12 +74,21 @@ class DaoUser {
              )
             );
         }
+
     public function archive($id,$archive) {
         DB::request('UPDATE user SET archive = ? WHERE id = ?', array($archive, $id));
     }
 
     public function delete($id) {
         DB::request('DELETE FROM user WHERE id = ?', array($id));
+    }
+
+    public function adminRank($user){
+        DB::request('UPDATE user SET role = ? WHERE id = ?', array(
+            $user->getRole(),
+            $user->getId()
+         )
+        );
     }
 }
 

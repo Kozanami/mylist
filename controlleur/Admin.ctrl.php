@@ -108,7 +108,7 @@ class CtrlAdmin extends Controller {
             $this->loadDao('User');
             $user = $this->DaoUser->read($_SESSION['id']);
             $user->setRole('ROLE_ADMIN');
-            $this->DaoUser->update($user);
+            $this->DaoUser->adminRank($user);
             logVar('danger','AdminCheat');
             header('Location:'.WEBROOT.'Library/index');
         }
