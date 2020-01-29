@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="navBarMargin">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top nav-bar-perso">
             <a class="navbar-brand"  href="<?= WEBROOT ?>Library/index">Maliste</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            <div class="topbar-divider d-none d-sm-block"></div>
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
@@ -21,7 +21,7 @@
 
                         </div>
                     </li>
-
+                    <div class="topbar-divider d-none d-sm-block"></div>
                     <?php
                     
                         if (isset($_SESSION['id']))
@@ -31,7 +31,7 @@
                     <li class="nav-item">
                         <a href="<?= WEBROOT ?>User/index" class="nav-link"> Profil</a>
                     </li>
-
+                    <div class="topbar-divider d-none d-sm-block"></div>
                     <?php  
                         } 
                         else 
@@ -41,7 +41,7 @@
                     <li class="nav-item">
                         <a href="<?= WEBROOT ?>User/signIn"  class="nav-link"> Inscription</a>
                     </li>
-
+                    <div class="topbar-divider d-none d-sm-block"></div>
                     <li class="nav-item">
                         <a href="<?= WEBROOT ?>User/logIn"  class="nav-link"> Connexion</a>
                     </li>

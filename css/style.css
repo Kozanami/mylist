@@ -15,14 +15,15 @@ body{
     position: relative;
 }
 
-#navBarMargin
+.nav-bar-perso
 {
     margin-bottom: 5vh;
+    box-shadow: 0 2px 2px -2px rgb(255, 255, 255);
 }
 
 main{
-    min-height: 80vh;
-    margin-bottom: 5vh;
+    min-height: 76vh;
+    position: relative;
 }
 
 footer{

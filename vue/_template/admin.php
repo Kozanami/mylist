@@ -16,7 +16,7 @@
         </header>
 
         <?php loadPartials('logMessage'); ?>
-        <main class="container-fluid">
+        <main class="container-fluid  pb-5">
         <?= $content ?>
         </main>
 
