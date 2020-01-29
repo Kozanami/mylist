@@ -6,6 +6,7 @@
             $pageId = $_SESSION['pageID'];
             $pageName = $_SESSION['pageName'];
             $pageMax = $_SESSION['pageMax'];
+            $controller = $_SESSION['controller'];
             unset($_SESSION['pageID']);
             unset($_SESSION['pageMax']);
 
@@ -13,7 +14,7 @@
             {
             ?>
              <li class="page-item">
-              <a class="page-link" href="<?= WEBROOT ?>Library/<?= $pageName ?>/<?= $pageId-1 ?>">Previous</a>
+              <a class="page-link" href="<?= WEBROOT ?><?= $controller ?>/<?= $pageName ?>/<?= $pageId-1 ?>">Previous</a>
             </li>
             <?php
             }
@@ -37,7 +38,7 @@
                 if($pageId == $i)
                 {
                 ?>
-                <li class="page-item active">
+                <li class="page-item disabled">
                 <a class="page-link" href="#"><?php echo $pageId; ?><span class="sr-only">(current)</span></a>
                 </li>
                 <?php
@@ -50,7 +51,7 @@
                     }
                     else
                     {
-                        ?> <li class="page-item"><a class="page-link" href="<?= WEBROOT ?>Library/<?= $pageName ?>/<?php echo $i; ?>"><?php echo $i; ?></a></li> <?php
+                        ?> <li class="page-item"><a class="page-link" href="<?= WEBROOT ?><?= $controller ?>/<?= $pageName ?>/<?php echo $i; ?>"><?php echo $i; ?></a></li> <?php
                     }
                 }
             }
@@ -67,7 +68,7 @@
         {
         ?>
         <li class="page-item">
-        <a class="page-link" href="<?= WEBROOT ?>Library/<?= $pageName ?>/<?= $pageId+1 ?>">Next</a>
+        <a class="page-link" href="<?= WEBROOT ?><?= $controller ?>/<?= $pageName ?>/<?= $pageId+1 ?>">Next</a>
         </li>
 
         <?php

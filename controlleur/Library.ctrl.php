@@ -7,6 +7,7 @@ class CtrlLibrary extends Controller {
 		{
 			$id = 1;
 		}
+		$_SESSION['controller'] = 'Library';
 		$_SESSION['pageName'] = $pageName;
 		$_SESSION['title'] = $title;
 

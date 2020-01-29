@@ -1,39 +1,41 @@
-<?php 
-	if (isset($user)) 
-	{
-?>
- <!-- Page Wrapper -->
- <div id="wrapper">
-
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
-
-  <!-- Main Content -->
-  <div id="content h-100">
-
-    <!-- Topbar -->
-    <!-- End of Topbar -->
-
-    <!-- Begin Page Content -->
-    <div class="col-md-8">
-       <div>
-            
-       </div>
-    </div>
-    <!-- /.container-fluid -->
-
-  </div>
-  <!-- End of Main Content -->
-
+<div class="container-fluid col-md-6 text-center">
+<div class="add-media bg-info mt-0 p-2"></div>
+<table class="table table-dark mb-0 table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nom & Prénom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Editer</th>
+        <th scope="col">Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php
+        foreach($data as $dataforeach)
+        {
+    ?>
+      <tr>
+        <td>
+            <?= $dataforeach->getLastName().' '.$dataforeach->getFirstName(); ?>
+        </td>
+        <td>
+            <?= $dataforeach->getEmail(); ?>
+        </td>
+        <td>
+            <?= $dataforeach->getStatut(); ?>
+        </td>
+        <td>
+            <i class="fas fa-edit"></i>
+        </td>
+        <td>
+            <i class="fas fa-trash-alt"></i>
+        </td>
+      </tr>
+    <?php
+        }
+    ?>
+    </tbody>
+  </table>
+    <?php loadPartials('pagination'); ?>
 </div>
-<!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-<?php 
-	}
-	else
-	{
-        header('Location:'.WEBROOT.'Library/index');
-	}
-?>

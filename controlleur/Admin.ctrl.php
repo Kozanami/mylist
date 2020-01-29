@@ -1,28 +1,62 @@
 <?php 
 class CtrlAdmin extends Controller {
-
-    public function index()
+ 
+    public function index($id)
     {
-        $_SESSION['title'] = 'Gestion des Utilisateurs';
 		if(isset($_SESSION['id'])) {
             $this->loadDao('User');
             $d['user'] = $this->DaoUser->read($_SESSION['id']);
-            $this->set($d);
             if(isset($_SESSION['roleAdmin']))
             {
                 if($_SESSION['roleAdmin'] == 'ROLE_ADMIN')
                 {
-                    $this->render('admin','Admin','index');
+                    if($id == 0 OR $id < 1)
+                    {
+                        $id = 1;
+                    }
+                    $_SESSION['controller'] = 'Admin';
+                    $_SESSION['pageName'] = 'index';
+                    $_SESSION['title'] = 'Gestion des Utilisateurs';
+                    $entityByPage = $_SESSION['entityByPage'];
+
+                    $countmax = $this->DaoUser->countUser();
+                  
+                    $currentPage = $id;
+
+                    $firstEntry = ($currentPage-1)*$entityByPage;
+
+                    if( $countmax > 0 )
+                    {
+                        $_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
+                    }
+                    else
+                    {
+                        $_SESSION['pageMax'] = 1;
+                    }
+                    if($id > $_SESSION['pageMax'])
+                    {
+                        header('Location:'.WEBROOT.'Admin/index');
+                    }
+                    else
+                    {
+                        $_SESSION['pageID'] = $id;
+                    }
+
+                    $d['data'] = $this->DaoUser->readAll($firstEntry);
+                    $this->set($d);
+                    $this->render('admin','Admin','index', $id);
                 }
                 else
                 {
-                   logVar('danger','AccessDenied');
+                    $this->set($d);
+                    logVar('danger','AccessDenied');
                     $this->render('default','Library','index');
                 }
             }
             else
             {
-               logVar('danger','AccessDenied');
+                $this->set($d);
+                logVar('danger','AccessDenied');
                 $this->render('admin','Admin','auth');
             }
         }

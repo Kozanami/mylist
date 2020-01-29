@@ -26,9 +26,23 @@ class DaoUser {
             return null;
         }
     }
+
+    public function countUser()
+    {
+        $count =  DB::request('SELECT COUNT(*) FROM user',array());
+        return $count[0]['COUNT(*)'];
+    }
     
-    public function readAll() {
-        $datas = DB::request('SELECT * FROM user WHERE archive = 0'); 
+    public function readAll($firstEntry = null) {
+        if($firstEntry != null)
+        {
+            $datas = DB::request('SELECT * FROM user WHERE archive = 0  ORDER BY id LIMIT '.$firstEntry.', '.$_SESSION['entityByPage'].''); 
+
+        }
+        else
+        {
+            $datas = DB::request('SELECT * FROM user WHERE archive = 0'); 
+        }
         if(!empty($datas)) {
             foreach($datas as $key => $data){
                 $tablUser[$key] = new User($data['email'], $data['password']);
