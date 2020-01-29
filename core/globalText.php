@@ -12,4 +12,5 @@
     $textAccessDenied = "Accès refusé ! vous n'avez pas les droits nécéssaires";
     $textMailPassError = "Email ou mot de passe incorrect";
     $textAdminCheat = "😈😈😈 Activation du hack .... Role administrateur obtenu, Bravo !😈😈😈";
+    $textDeleteAccountUser = "Le compte de l'utilisateur à bien était supprimer";
 ?>

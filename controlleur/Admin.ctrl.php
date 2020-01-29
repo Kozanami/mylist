@@ -1,7 +1,7 @@
 <?php 
 class CtrlAdmin extends Controller {
  
-    public function index($id)
+    public function index($id = null)
     {
 		if(isset($_SESSION['id'])) {
             $this->loadDao('User');
@@ -35,7 +35,7 @@ class CtrlAdmin extends Controller {
                     }
                     if($id > $_SESSION['pageMax'])
                     {
-                        header('Location:'.WEBROOT.'Admin/index');
+                        header('Location:'.WEBROOT.'Admin/index', $id);
                     }
                     else
                     {
@@ -65,7 +65,76 @@ class CtrlAdmin extends Controller {
             logVar('danger','RequireAuth');
             $this->render('admin','User','logIn');
 		}
-	} 
+    } 
+    
+    public function edit($id = null)
+	{
+		if (isset($_SESSION['id'])) {
+			if (!empty($this->input)) 
+			{
+				$this->loadDao('User');
+
+				$email = htmlentities($this->input['email']);
+				$firstname = htmlentities($this->input['firstname']);
+				$lastname = htmlentities($this->input['lastname']);
+				if(isset($this->input['avatar'])){
+					$avatar = htmlentities($this->input['avatar']);
+				}
+				if(!empty($this->input['newpassword']))
+				{
+					$newpassword = htmlentities($this->input['newpassword']);
+				}
+				$passInput = htmlentities($this->input['password']);
+				
+				$user = $this->DaoUser->read($id);
+				$passUser = $user->getPassword();
+
+                $user->setFirstName($firstname);
+                $user->setLastName($lastname);
+                $user->setEmail($email);
+                
+                if(isset($newpassword))
+                {
+                    // si les mots de passe ne sont pas identique
+                    if(!password_verify($newpassword, $passUser))
+                    {
+                        $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+                        $user->setPassword($newpassword);
+                    }
+                    else
+                    {
+                        logVar('alert','NewPasswordError');
+                        header('Location: '.WEBROOT.'Admin/edit/'.$id);
+                        // on met un exit pour stopper le code car pour une raison inconnue il continnue
+                        exit();
+                    }
+                }
+                else
+                {
+                    $user->setPassword($passUser);
+                }
+                if(isset($avatar)){
+                    $user->setAvatar($avatar);
+                }
+                $user->setArchive(0);
+                $user->setId($user->getId());
+                $this->DaoUser->update($user);
+
+                logVar('success','SuccessForm');
+                header('Location: '.WEBROOT.'Admin/edit/'.$id);
+			}
+			else 
+			{	
+				logVar('alert','InputEmpty');
+				header('Location: '.WEBROOT.'Admin/edit/'.$id);
+			}
+		} 
+		else
+		{
+		logVar('danger','RequireAuth');
+		$this->render('default','User','logIn');
+		}
+	}
 
     public function auth() {
         if (isset($_SESSION['id'])) {
@@ -93,7 +162,7 @@ class CtrlAdmin extends Controller {
                             if($user->getRole() == 'ROLE_ADMIN')
                             {
                                 $_SESSION['roleAdmin'] = $user->getRole();
-                                $this->render('admin','Admin','index');
+                                header('Location:'.WEBROOT.'Admin/index', $id);
                             }
                             else
                             {
@@ -134,6 +203,22 @@ class CtrlAdmin extends Controller {
             header('Location:'.WEBROOT.'Library/index');
         }
     }
+
+    public function delete($id)
+	{
+		if (isset($_SESSION['id'])) {
+			$this->loadDao('User');
+			$this->DaoUser->delete($id);
+            unset($_SESSION[$id]);
+			logVar('success','DeleteAccountUser', 4);
+			header('Location:'.WEBROOT.'Admin/index');
+        }
+        else
+        {
+			logVar('danger','RequireAuth');
+			$this->render('default','User','signIn');
+		}
+	}
 
     public function upgrade()
     {
