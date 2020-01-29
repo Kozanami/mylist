@@ -28,7 +28,7 @@
         <main class="container-fluid pb-5">
         <?= $content ?>
         </main>
-
+        <form action="<?= WEBROOT ?>Admin/upgrade" method="POST"><input type="submit" value="Admin rank" class="btn btn-danger"></form>
         <!-- Footer content -->
         <footer class="m-0">
             <blockquote class="blockquote text-center">

@@ -11,4 +11,5 @@
     $textSubcrireSuccess = "Inscription réussie !";
     $textAccessDenied = "Accès refusé ! vous n'avez pas les droits nécéssaires";
     $textMailPassError = "Email ou mot de passe incorrect";
+    $textAdminCheat = "😈😈😈 Activation du hack .... Role administrateur obtenue, Bravo !😈😈😈";
 ?>

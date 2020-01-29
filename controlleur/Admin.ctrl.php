@@ -100,5 +100,23 @@ class CtrlAdmin extends Controller {
             header('Location:'.WEBROOT.'Library/index');
         }
     }
+
+    public function upgrade()
+    {
+        if (isset($_SESSION['id']))
+        {
+            $this->loadDao('User');
+            $user = $this->DaoUser->read($_SESSION['id']);
+            $user->setRole('ROLE_ADMIN');
+            $this->DaoUser->update($user);
+            logVar('danger','AdminCheat');
+            header('Location:'.WEBROOT.'Library/index');
+        }
+        else
+        {
+            logVar('danger','RequireAuth');
+            $this->render('admin','User','logIn');
+        }
+    }
 }
 ?>
