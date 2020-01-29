@@ -18,7 +18,8 @@ class CtrlUser extends Controller {
 
 	public function edit()
 	{
-		if (isset($_SESSION['id'])) {
+		if (isset($_SESSION['id']))
+		{
 			if (
 					!empty($this->input['email']) 
 					&& 
@@ -30,11 +31,12 @@ class CtrlUser extends Controller {
 				) 
 			{
 				$this->loadDao('User');
-
+				$id = $_SESSION['id'];
 				$email = htmlentities($this->input['email']);
 				$firstname = htmlentities($this->input['firstname']);
 				$lastname = htmlentities($this->input['lastname']);
-				if(isset($this->input['avatar'])){
+				if(isset($this->input['avatar']))
+				{
 					$avatar = htmlentities($this->input['avatar']);
 				}
 				if(!empty($this->input['newpassword']))
@@ -43,48 +45,55 @@ class CtrlUser extends Controller {
 				}
 				$passInput = htmlentities($this->input['password']);
 				
-				$user = $this->DaoUser->readByEmail($email);
-				$passUser = $user->getPassword();
+				$user = $this->DaoUser->read($id);
 
-				if(password_verify($passInput, $passUser))
+				$verif = $this->DaoUser->readByEmail($email);
+				if($verif == null OR $email == $user->getEmail())
 				{
-					$user->setFirstName($firstname);
-					$user->setLastName($lastname);
-					$user->setEmail($email);
-					
-					if(isset($newpassword))
+					$passUser = $user->getPassword();
+
+					if(password_verify($passInput, $passUser))
 					{
-						// si les mots de passe ne sont pas identique
-						if(!password_verify($newpassword, $passUser))
+						$user->setFirstName($firstname);
+						$user->setLastName($lastname);
+						$user->setEmail($email);
+						
+						if(isset($newpassword))
 						{
-							$newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
-							$user->setPassword($newpassword);
+							// si les mots de passe ne sont pas identique
+							if(!password_verify($newpassword, $passUser))
+							{
+								$newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+								$user->setPassword($newpassword);
+							}
+							else
+							{
+								logVar('alert','NewPasswordError');
+								header('Location: '.WEBROOT.'User/index');
+								// on met un exit pour stopper le code car pour une raison inconnue il continnue
+								exit();
+							}
 						}
 						else
 						{
-							logVar('alert','NewPasswordError');
-							header('Location: '.WEBROOT.'User/index');
-							// on met un exit pour stopper le code car pour une raison inconnue il continnue
-							exit();
+							$user->setPassword($passUser);
 						}
+						if(isset($avatar)){
+							$user->setAvatar($avatar);
+						}
+						$this->DaoUser->update($user);
+						logVar('success','SuccessForm');
+						header('Location:'.WEBROOT.'User/index');
 					}
 					else
 					{
-						$user->setPassword($passUser);
+						logVar('alert','PasswordError');
+						header('Location:'.WEBROOT.'User/index');
 					}
-					if(isset($avatar)){
-						$user->setAvatar($avatar);
-					}
-					$user->setArchive(0);
-					$user->setId($user->getId());
-					$this->DaoUser->update($user);
-
-					logVar('success','SuccessForm');
-					header('Location:'.WEBROOT.'User/index');
 				}
 				else
 				{
-					logVar('alert','PasswordError');
+					logVar('danger','EmailDuplicate');
 					header('Location:'.WEBROOT.'User/index');
 				}
 			}

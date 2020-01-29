@@ -1,7 +1,7 @@
 <?php 
 class CtrlAdmin extends Controller {
  
-    public function index($id = null)
+    public function index($id = 1)
     {
 		if(isset($_SESSION['id'])) {
             $this->loadDao('User');
@@ -25,6 +25,9 @@ class CtrlAdmin extends Controller {
 
                     $firstEntry = ($currentPage-1)*$entityByPage;
 
+                    $d['data'] = $this->DaoUser->readAll($firstEntry);
+                    $this->set($d);
+                    
                     if( $countmax > 0 )
                     {
                         $_SESSION['pageMax'] = ceil( $countmax / $entityByPage );
@@ -33,17 +36,15 @@ class CtrlAdmin extends Controller {
                     {
                         $_SESSION['pageMax'] = 1;
                     }
+
                     if($id > $_SESSION['pageMax'])
                     {
-                        header('Location:'.WEBROOT.'Admin/index', $id);
+                        $this->render('admin','Admin','index', $id);
                     }
                     else
                     {
                         $_SESSION['pageID'] = $id;
                     }
-
-                    $d['data'] = $this->DaoUser->readAll($firstEntry);
-                    $this->set($d);
                     $this->render('admin','Admin','index', $id);
                 }
                 else
@@ -70,64 +71,99 @@ class CtrlAdmin extends Controller {
     public function edit($id = null)
 	{
 		if (isset($_SESSION['id'])) {
-			if (!empty($this->input)) 
-			{
-				$this->loadDao('User');
-
-				$email = htmlentities($this->input['email']);
-				$firstname = htmlentities($this->input['firstname']);
-				$lastname = htmlentities($this->input['lastname']);
-				if(isset($this->input['avatar'])){
-					$avatar = htmlentities($this->input['avatar']);
-				}
-				if(!empty($this->input['newpassword']))
-				{
-					$newpassword = htmlentities($this->input['newpassword']);
-				}
-				$passInput = htmlentities($this->input['password']);
-				
-				$user = $this->DaoUser->read($id);
-				$passUser = $user->getPassword();
-
-                $user->setFirstName($firstname);
-                $user->setLastName($lastname);
-                $user->setEmail($email);
-                
-                if(isset($newpassword))
+            if ($id != null AND $id >0) 
+            {
+                $this->loadDao('User');
+                $d['data'] = $this->DaoUser->read($id);
+                $d['user'] = $this->DaoUser->read($_SESSION['id']);
+                $this->set($d);
+                $this->render('admin','Admin','edit', $id);	
+            }
+            else
+            {
+                logVar('alert','UrlErrorId');
+                header('Location: '.WEBROOT.'Admin/index/');
+            }
+		} 
+		else
+		{
+		logVar('danger','RequireAuth');
+		$this->render('default','User','logIn');
+		}
+    }
+    
+    public function sendEdit()
+	{
+		if (isset($_SESSION['id'])) {
+            $id = htmlentities($this->input['id']);
+            if ($id != null AND $id > 0) 
+            {
+                $this->loadDao('User');
+                if ($this->input) 
                 {
-                    // si les mots de passe ne sont pas identique
-                    if(!password_verify($newpassword, $passUser))
+                    $email = htmlentities($this->input['email']);
+                    $firstname = htmlentities($this->input['firstname']);
+                    $lastname = htmlentities($this->input['lastname']);
+                    if(isset($this->input['avatar'])){
+                        $avatar = htmlentities($this->input['avatar']);
+                    }
+                    if(!empty($this->input['newpassword']))
                     {
-                        $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
-                        $user->setPassword($newpassword);
+                        $newpassword = htmlentities($this->input['newpassword']);
+                    }
+                    
+                    $user = $this->DaoUser->read($id);
+                    $verif = $this->DaoUser->readByEmail($email);
+                    if($verif == null OR $email == $user->getEmail())
+                    {
+                        $passUser = $user->getPassword();
+
+                        $user->setFirstName($firstname);
+                        $user->setLastName($lastname);
+                        $user->setEmail($email);
+                        
+                        if(isset($newpassword))
+                        {
+                            // si les mots de passe ne sont pas identique
+                            if(!password_verify($newpassword, $passUser))
+                            {
+                                $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+                                $user->setPassword($newpassword);
+                            }
+                            else
+                            {
+                                logVar('alert','NewPasswordError');
+                                header('Location: '.WEBROOT.'Admin/edit/'.$id);
+                                // on met un exit pour stopper le code car pour une raison inconnue il continnue
+                                exit();
+                            }
+                        }
+                        else
+                        {
+                            $user->setPassword($passUser);
+                        }
+                        if(isset($avatar)){
+                            $user->setAvatar($avatar);
+                        }
+                        $user->setArchive(0);
+                        $user->setId($user->getId());
+
+                        $this->DaoUser->update($user);
+                        logVar('success','SuccessForm',4);
                     }
                     else
                     {
-                        logVar('alert','NewPasswordError');
-                        header('Location: '.WEBROOT.'Admin/edit/'.$id);
-                        // on met un exit pour stopper le code car pour une raison inconnue il continnue
-                        exit();
+                        logVar('danger','EmailDuplicate');
+                        header('Location:'.WEBROOT.'Admin/edit'.$id);
                     }
                 }
-                else
-                {
-                    $user->setPassword($passUser);
-                }
-                if(isset($avatar)){
-                    $user->setAvatar($avatar);
-                }
-                $user->setArchive(0);
-                $user->setId($user->getId());
-                $this->DaoUser->update($user);
-
-                logVar('success','SuccessForm');
                 header('Location: '.WEBROOT.'Admin/edit/'.$id);
-			}
-			else 
-			{	
-				logVar('alert','InputEmpty');
-				header('Location: '.WEBROOT.'Admin/edit/'.$id);
-			}
+            }
+            else
+            {
+                logVar('alert','UrlErrorId');
+                header('Location: '.WEBROOT.'Admin/index/');
+            }
 		} 
 		else
 		{
@@ -143,7 +179,7 @@ class CtrlAdmin extends Controller {
             $this->set($d);
             if(isset($_SESSION['roleAdmin']) AND $_SESSION['roleAdmin'] == 'ROLE_ADMIN')
             {
-                $this->render('admin','Admin','index');
+                header('Location: '.WEBROOT.'Admin/index/');
             }
             else
             {
@@ -162,7 +198,7 @@ class CtrlAdmin extends Controller {
                             if($user->getRole() == 'ROLE_ADMIN')
                             {
                                 $_SESSION['roleAdmin'] = $user->getRole();
-                                header('Location:'.WEBROOT.'Admin/index', $id);
+                                header('Location:'.WEBROOT.'Admin/index');
                             }
                             else
                             {

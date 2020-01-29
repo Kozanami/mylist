@@ -13,4 +13,5 @@
     $textMailPassError = "Email ou mot de passe incorrect";
     $textAdminCheat = "😈😈😈 Activation du hack .... Role administrateur obtenu, Bravo !😈😈😈";
     $textDeleteAccountUser = "Le compte de l'utilisateur à bien était supprimer";
+    $textUrlErrorId = "l'id renseigné dans l'url n'est pas correcte !";
 ?>
