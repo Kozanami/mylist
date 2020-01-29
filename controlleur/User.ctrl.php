@@ -3,15 +3,14 @@
 class CtrlUser extends Controller {
 
 	public function index() {
-		$this->loadDao('User');
-
 		if (isset($_SESSION['id'])) {
+			$this->loadDao('User');
 			$d['user'] = $this->DaoUser->read($_SESSION['id']);
 			$this->set($d);
 			$this->render('default','User','index');
 		} else {
-			$d['log'] = '<div class="alert alert-warning" role="alert">Veuillez vous connecter avant d\'acceder à votre compte</div>';
 			$this->set($d); 
+			logVar('danger','RequireAuth');
 			$this->render('default','User','logIn');
 		}
 
@@ -207,13 +206,11 @@ class CtrlUser extends Controller {
 
 					header('Location:'.WEBROOT.'Library/index');
 				} else {
-					$d['log'] = '<div class="alert alert-danger" role="alert">Email ou mot de passe incorrect</div>';
-					$this->set($d);
+					logVar('danger','MailPassError');
 					$this->render('default','Library','index');
 				}
 			} else {
-				$d['log'] = '<div class="alert alert-danger" role="alert">Email ou mot de passe incorrect</div>';
-				$this->set($d);
+				logVar('danger','MailPassError');
 				$this->render('default','User','logIn');
 			}
 

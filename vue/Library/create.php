@@ -8,7 +8,7 @@
 			?>
 		<div class="form-group">
 			<label for="name">Name</label>
-			<input type="text" name="name" class="form-control" id="name" placeholder="Interstellar" value="test<?= sha1(random_int(1,1000)); ?>" required>
+			<input type="text" name="name" class="form-control" id="name" placeholder="Interstellar" value="test<?= str_shuffle(substr(preg_replace('/[0-9]+/', '',(sha1(random_int(1,1000)))),0,10)); ?>" required>
 		</div>
 
 		<div class="form-group">

@@ -7,6 +7,7 @@ class User extends AbstractEntity {
 	private $avatar;
 	private $statut;
 	private $archive;
+	private $role;
 
 	public function __construct($email,$password){
 		$this->email = $email;
@@ -54,6 +55,12 @@ class User extends AbstractEntity {
 	}
 	public function setArchive($archive) {
 		$this->archive = $archive;
+	}
+	public function getRole() {
+		return $this->role;
+	}
+	public function setRole($role) {
+		$this->role = $role;
 	}
 }
     

@@ -63,6 +63,6 @@
 	}
 	else
 	{
-
+		header('Location:'.WEBROOT.'Library/index');
 	}
 ?>

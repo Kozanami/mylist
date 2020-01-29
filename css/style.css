@@ -67,3 +67,24 @@ footer{
 .bg-perso:active{
     background: var(--color-perso)!important;
 }
+
+.img-profile {
+  height: 2rem;
+  width: 2rem;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+}
+
+.topbar-divider {
+    width: 0;
+    border-right: 1px solid #adadad;
+    height: calc(4.375rem - 2rem);
+    margin: auto 1rem;
+    border-radius: 50%;
+}
+
+.topbar-text-size{
+    font-size: 1rem;
+}

@@ -9,4 +9,6 @@
     $textNewPasswordError = "Les deux mots de passes ne doivent pas être identique !";
     $textDeleteAccount = "Votre compte à bien était supprimer !";
     $textSubcrireSuccess = "Inscription réussie !";
+    $textAccessDenied = "Accès refusé ! vous n'avez pas les droits nécéssaires";
+    $textMailPassError = "Email ou mot de passe incorrect";
 ?>

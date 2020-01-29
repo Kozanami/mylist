@@ -10,16 +10,7 @@
     </head>
     <body>
         <!-- Navbar content -->
-        <?php
-            if(isset($user))
-            {
-                loadPartials('navBar', $user);
-            }
-            else
-            {
-                loadPartials('navBar');
-            }
-        ?>
+        <?php loadPartials('navBar', $user); ?>
         <!-- Header content -->
         <header>
         </header>

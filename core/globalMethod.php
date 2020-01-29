@@ -1,10 +1,5 @@
 <?php 
 
-    // return le dossier ou l'on ce trouve 
-    function testPath(){
-        return basename(__DIR__);
-    }
-
     // Charger un Partials
     function loadPartials($name,$data = null)
     {
@@ -35,28 +30,8 @@
             }
         }
     }
-    
-    /////////////////////////////////////////////////
-    //////////////       Module         /////////////
-    /////////////////////////////////////////////////
 
     // Error Module
-    function logText($type, $message, $log = null)
-    {
-        $_SESSION['logType'] = $type;
-        $_SESSION['logMessage'] = $message;
-
-        if(is_int($log) > 0 AND is_int($log) < 13)
-        {
-            echo 'danger','La taille attribuer au container depasse celle de bootstrap [Module Error GlobalMethod.php]';
-        }
-
-        if(!$log = null AND is_int($log) AND is_int($log) > 0 AND is_int($log) < 13)
-        {
-            $_SESSION['logContainerWidth'] = $log;
-        }
-    }
-
     function logVar($type, $message, $log = null)
     {
         $_SESSION['logType'] = $type;
@@ -69,4 +44,17 @@
         }
     }
 
+    /////////////////////////////////////////////////
+    //////////////       test        /////////////
+    /////////////////////////////////////////////////
+
+    function dump_require()
+    {
+        return var_dump(get_included_files());
+    }
+
+    // return le dossier ou l'on ce trouve 
+    function testPath(){
+        return basename(__DIR__);
+    }
 ?>

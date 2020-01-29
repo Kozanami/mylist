@@ -1,5 +1,5 @@
 <?php 
-require_once('modele/Library.class.php');
+require_once('model/Library.class.php');
 
 class DaoLibrary {
     

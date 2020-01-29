@@ -1,7 +1,5 @@
 <?php session_start();
 
-	define('WEBROOTER',explode("/", $_SERVER['REQUEST_URI'])[1]);
-	// WEBROOT => dossier du projet de la racine serveur
 	define('WEBROOT',str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 	// ROOT => dossier du projet de la racine du disque dur
 	define('ROOT',str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
@@ -41,7 +39,7 @@
 
 	// Chargement du controleur
 	// $tabControlleur est le tableau contenant tout les nom de controlleurs accepté par l'appli
-	$tabControlleur = array("User", "Library");
+	$tabControlleur = array("User", "Library", "Admin");
 
 	// Affectation à $param de l'explode du $_GET['p'], permet de passer de l'url
 	// 'Controller/action' à un tableau ['Controller','action']

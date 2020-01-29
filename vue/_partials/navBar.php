@@ -31,9 +31,6 @@
                     <li class="nav-item">
                         <a href="<?= WEBROOT ?>User/index" class="nav-link"> Profil</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?= WEBROOT ?>User/logOut" class="nav-link"> Déconnexion</a>
-                    </li>
 
                     <?php  
                         } 
@@ -54,5 +51,60 @@
                     ?>
 
                 </ul>
+                <?php
+                    
+                    if (isset($_SESSION['id']))
+                    {
+
+                ?>
+                    <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="<?= WEBROOT ?>User/logOut" class="nav-link text-danger"> Déconnexion</a>
+                    </li>
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <?php
+                        if(isset($_SESSION['roleAdmin']) && $_SESSION['roleAdmin'] == 'ROLE_ADMIN')
+                        {
+                            echo '
+                                <li class="navbar-nav  pr-1">
+                                    <a class="nav-link text-danger" href="'.WEBROOT.'Admin/logOut">
+                                        Déconnexion du Panel Admin
+                                    </a>
+                                </li>
+                                <div class="topbar-divider d-none d-sm-block"></div>
+                            ';
+                        }
+                        if($data->getRole() == 'ROLE_ADMIN')
+                        {
+                            echo '
+                                <li class="navbar-nav pr-1">
+                                    <a class="nav-link text-info" href="'.WEBROOT.'Admin/auth">
+                            ';
+                                    if(isset($_SESSION['roleAdmin']) && $_SESSION['roleAdmin'] == 'ROLE_ADMIN')
+                                    {
+                                        echo 'Panel Admin';
+                                    }
+                                    else
+                                    {
+                                        echo 'Connexion au Panel Admin';
+                                    }
+                            echo '
+                                    </a>
+                                </li>
+                            ';
+                        }
+                    ?>
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item pr-1">
+                        <a class="nav-link" href="<?= WEBROOT ?>User/index">
+                           <span class="mr-2 d-lg-inline text-gray-400 small font-weight-normal topbar-text-size"><?= $data->getFirstName().' '.$data->getLastName() ?></span>
+                            <img src="<?= WEBROOT.'img/avatar/'.$data->getAvatar(); ?>" alt="image de profil" class="img-profile rounded-circle">
+                        </a>
+                    </li>
+                </ul>
+                <?php 
+                        } 
+                    ?>
             </div>
         </nav>

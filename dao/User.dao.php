@@ -1,5 +1,5 @@
 <?php 
-require_once('modele/User.class.php');
+require_once('model/User.class.php');
 
 class DaoUser {
 
@@ -19,6 +19,7 @@ class DaoUser {
                 $user->setFirstName($data['firstname']);
                 $user->setAvatar($data['avatar']);
                 $user->setStatut($data['statut']);
+                $user->setRole($data['role']);
             }  
             return $user;
         } else {
@@ -53,6 +54,7 @@ class DaoUser {
                 $user->setFirstName($data['firstname']);
                 $user->setAvatar($data['avatar']);
                 $user->setStatut($data['statut']);
+                $user->setRole($data['role']);
             }
             return $user;
         } else {

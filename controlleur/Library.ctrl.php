@@ -13,6 +13,8 @@ class CtrlLibrary extends Controller {
 		$entityByPage = $_SESSION['entityByPage'];
 
 		if (isset($_SESSION['id'])) {
+			$this->loadDao('User');
+			$d['user'] = $this->DaoUser->read($_SESSION['id']);
 			$userid = $_SESSION['id'];
 			$this->loadDao('Library');
 
@@ -98,6 +100,8 @@ class CtrlLibrary extends Controller {
 	{
 		$_SESSION['title'] = 'Modifier';
 		if (isset($_SESSION['id'])) {
+		$this->loadDao('User');
+		$d['user'] = $this->DaoUser->read($_SESSION['id']);
 			if (!empty($this->input)) {
 
 				$this->loadDao('Library');
@@ -199,11 +203,13 @@ class CtrlLibrary extends Controller {
 						break;
 				}
 				logVar('success','SuccessForm');
-				
 				header('Location:'.WEBROOT.'Library/'.$_SESSION['pageName']);
 			}
 			else 
 			{
+				$this->loadDao('User');
+				$d['user'] = $this->DaoUser->read($_SESSION['id']);
+				$this->set($d);
 				$this->render('default','Library','create');
 			}
 		} 
@@ -218,6 +224,8 @@ class CtrlLibrary extends Controller {
 	public function detail($id)
 	{
 		if (isset($_SESSION['id'])) {
+			$this->loadDao('User');
+			$d['user'] = $this->DaoUser->read($_SESSION['id']);
 			$userid = $_SESSION['id'];
 			$this->loadDao('Library');
 			
@@ -246,7 +254,7 @@ class CtrlLibrary extends Controller {
 			$this->loadDao('Library');
 			$this->DaoLibrary->delete($id);
 
-			logVar('danger','DeleteLibrary');
+			logVar('success','DeleteLibrary');
 			redirectHome();
 		}
 		else 
