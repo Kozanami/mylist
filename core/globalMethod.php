@@ -3,7 +3,7 @@
     // Charger un Partials
     function loadPartials($name,$data = null)
     {
-        if($_SERVER['HTTP_HOST'] = '127.0.0.1' OR $_SERVER['HTTP_HOST'] = 'localhost')
+        if($_SERVER['HTTP_HOST'] =='127.0.0.1' OR $_SERVER['HTTP_HOST'] == 'localhost')
         {
             require($_SERVER['DOCUMENT_ROOT'] . SERVERNAME . '/vue/_partials/'.$name.'.php'); // Local Host
         }
