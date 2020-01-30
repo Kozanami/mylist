@@ -58,7 +58,14 @@
 
 		<div class="form-group">
 			<label for="evaluation">Note</label>
-			<input type="number" name="evaluation" id="evaluation" class="form-control" value="1">
+			<select class="form-control form-control-lg" name="evaluation" id="evaluation">
+				<?php			
+				for($i = 1 ; $i < 11 ; $i++)
+				{
+					echo '<option value="'.$i.'">'.$i.'</option>';
+				}
+				?>
+			</select>
 		</div>
 
 		<div class="form-group">

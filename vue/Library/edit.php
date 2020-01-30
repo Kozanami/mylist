@@ -116,22 +116,22 @@
 		<div class="form-row">
 		<div class="col">
 			<label for="episode">Episode actuelle</label>
-			<input type="number" name="episode" id="episode" class="form-control" placeholder="5"  value="<?php echo $data->getSeason(); ?>">
+			<input type="number" name="episode" id="episode" class="form-control form-control-lg" placeholder="5"  value="<?php echo $data->getSeason(); ?>">
 		</div>
 		<div class="col">
 		<label for="epmax">Episode max</label>
-			<input type="number" name="epmax" id="epmax" class="form-control" placeholder="24"  value="<?php echo $data->getSmax(); ?>">
+			<input type="number" name="epmax" id="epmax" class="form-control form-control-lg" placeholder="24"  value="<?php echo $data->getSmax(); ?>">
 		</div>
 		</div>
 
 		<div class="form-row">
 		<div class="col">
 			<label for="season">Saison actuelle</label>
-			<input type="number" name="season" id="season" class="form-control" placeholder="2"  value="<?php echo $data->getEpisode(); ?>">
+			<input type="number" name="season" id="season" class="form-control form-control-lg" placeholder="2"  value="<?php echo $data->getEpisode(); ?>">
 		</div>
 		<div class="col">
 			<label for="smax">Saisons max</label>
-			<input type="number" name="smax" id="smax" class="form-control" placeholder="4"  value="<?php echo $data->getEpmax(); ?>">
+			<input type="number" name="smax" id="smax" class="form-control form-control-lg" placeholder="4"  value="<?php echo $data->getEpmax(); ?>">
 		</div>
 	</div>
 
@@ -142,8 +142,22 @@
 		</div>
 
 		<div class="form-group">
-			<label for="evaluation">Note</label>
-			<input type="number" name="evaluation" id="evaluation" class="form-control"  value="<?php echo $data->getEvaluation(); ?>">
+			<label for="evaluation">Note actuelle : <?php loadPartials('evaluation',$data->getEvaluation()); ?></label>
+			<select class="form-control form-control-lg" name="evaluation" id="evaluation">
+				<?php
+				
+				for($i = 1 ; $i < 11 ; $i++)
+				{
+					if($i != $data->getEvaluation()){
+						echo '<option value="'.$i.'">'.$i.'</option>';
+					}
+					else
+					{
+						echo '<option value="'.$data->getEvaluation().'" selected>'.$data->getEvaluation().'</option>';
+					}	
+				}
+				?>
+			</select>
 		</div>
 
 		<div class="form-group">

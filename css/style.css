@@ -1,6 +1,4 @@
 :root{
-    --color-perso: hsl(190, 96%, 31%);
-    --color-perso1: hsl(190, 96%, 31%);
     --dark-bg: hsl(0, 0%, 15%);
 }
 
@@ -45,28 +43,12 @@ footer{
     border-radius: 0 0 10px 10px  !important;
 }
 
-.color-perso{
-    color: var(--color-perso)!important;
+.gold-star{
+    color: hsl(51, 100%, 48%);
 }
 
-.bg-perso{
-    background: var(--color-perso)!important;
-}
-
-.color-perso:hover{
-    color: var(--color-perso1)!important;
-}
-
-.bg-perso:hover{
-    background: var(--color-perso1)!important;
-}
-
-.color-perso:active{
-    color: var(--color-perso)!important;
-}
-
-.bg-perso:active{
-    background: var(--color-perso)!important;
+.empty-star{
+    color: hsl(0, 0%, 61%);
 }
 
 .img-profile {
