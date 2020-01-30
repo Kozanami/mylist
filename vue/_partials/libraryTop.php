@@ -2,4 +2,4 @@
 
 <?php loadPartials('filterTabs'); ?>
 
-<table class="table table-dark mb-0 table-hover">
+<table class="table table-dark mb-0 table-hover table-responsive-sm">

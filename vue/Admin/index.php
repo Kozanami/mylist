@@ -5,7 +5,7 @@
 ?>
 <div class="container-fluid col-md-6 text-center">
 <div class="add-media bg-info mt-0 p-2"></div>
-<table class="table table-dark mb-0 table-hover">
+<table class="table table-dark mb-0 table-hover table-responsive-sm">
     <thead>
       <tr>
         <th scope="col">Nom & Prénom</th>
