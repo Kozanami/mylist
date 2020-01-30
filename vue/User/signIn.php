@@ -1,6 +1,5 @@
 <div class="container-fluid col-auto d-flex justify-content-center text-center">
 	<form action="<?= WEBROOT ?>User/signIn" method="POST" class="content col-md-4 col-xs-fluid">
-		<img class="logo" src="<?= WEBROOT ?>img/logo.png" alt="">
 		<h1 class="text-center">Inscription</h1>
 		<div class="form-group">
 			<label for="exampleInputEmail1">Email</label>
