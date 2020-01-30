@@ -58,7 +58,7 @@
                     </form>
 
                     <li class="list-group-item bg-dark">
-                        <a href="<?= WEBROOT ?>/Admin/delete"><input type="submit" class="btn btn-danger btn-lg btn-block" value="Supprimer le compte"></a>
+                        <a href="<?= WEBROOT ?>/Admin/delete/<?= $data->getId(); ?>"><input type="submit" class="btn btn-danger btn-lg btn-block" value="Supprimer le compte"></a>
                     </li>
 					</td>
 				</table>
