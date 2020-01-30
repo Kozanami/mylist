@@ -6,28 +6,17 @@
             <div class="topbar-divider d-none d-sm-block"></div>
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Bibliothèque
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/index">Toute la Bibliothèque</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/film">Les Films</a>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/serie">Les Séries</a>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/anime">Les Animés</a>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/dessinAnime">Les Déssin Animés</a>
-                            <a class="dropdown-item" href="<?= WEBROOT ?>Library/courtMetrage">Les Court Métrages</a>
-
-                        </div>
-                    </li>
-                    <div class="topbar-divider d-none d-sm-block"></div>
-                    <?php
-                    
+                <?php
                         if (isset($_SESSION['id']))
                         {
+                    ?> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Bibliothèque
+                        </a>
+                    </li>
+                    <div class="topbar-divider d-none d-sm-block"></div>
 
-                    ?>
                     <li class="nav-item">
                         <a href="<?= WEBROOT ?>User/index" class="nav-link"> Profil</a>
                     </li>

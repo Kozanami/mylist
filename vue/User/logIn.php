@@ -1,5 +1,5 @@
 <div class="container-fluid col-auto d-flex justify-content-center text-center">
-	<form action="<?= WEBROOT ?>User/logIn" method="POST" class="content col-4">
+	<form action="<?= WEBROOT ?>User/logIn" method="POST" class="content col-md-4 col-xs-fluid">
 		<h1 class="text-center">Connexion</h1>
 		<div class="form-group">
 			<label for="exampleInputEmail1">Email</label>
