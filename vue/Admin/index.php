@@ -31,10 +31,10 @@
             <?= $dataforeach->getStatut(); ?>
         </td>
         <td>
-            <a href="<?= WEBROOT ?>/Admin/edit/<?= $dataforeach->getId(); ?>"><i class="fas fa-edit"></i></a>
+            <a href="<?= WEBROOT ?>Admin/edit/<?= $dataforeach->getId(); ?>"><i class="fas fa-edit"></i></a>
         </td>
         <td>
-            <a href="<?= WEBROOT ?>/Admin/delete/<?= $dataforeach->getId(); ?>"><i class="fas fa-trash-alt"></i></a>
+            <a href="<?= WEBROOT ?>Admin/delete/<?= $dataforeach->getId(); ?>"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
     <?php
