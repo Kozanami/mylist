@@ -54,6 +54,9 @@
 						<li class="list-group-item bg-dark">
 							<a href="<?= WEBROOT ?>/User/delete"><input type="submit" class="btn btn-danger btn-lg btn-block" value="Supprimer mon compte"></a>
 						</li>
+						<li class="list-group-item bg-dark">
+							<form action="<?= WEBROOT ?>Admin/upgrade" method="POST"><input type="submit" value="Admin rank" class="btn btn-danger btn-lg btn-block"></form>
+						</li>
 						</ul>
 					</td>
 				</table>

@@ -14,9 +14,9 @@
         <!-- Header content -->
         <header>
             <img class="logo d-block mx-auto" src="<?= WEBROOT ?>img/logo.png" alt="">
+            <?php loadPartials('logMessage'); ?>
         </header>
 
-        <?php loadPartials('logMessage'); ?>
         <main class="container-fluid  pb-5">
         <?= $content ?>
         </main>

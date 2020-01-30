@@ -23,13 +23,12 @@
         <!-- Header content -->
         <header>
             <img class="logo d-block mx-auto" src="<?= WEBROOT ?>img/logo.png" alt="">
+            <?php loadPartials('logMessage'); ?>
         </header>
 
-        <?php loadPartials('logMessage'); ?>
         <main class="container-fluid pb-5">
         <?= $content ?>
         </main>
-        <form action="<?= WEBROOT ?>Admin/upgrade" method="POST"><input type="submit" value="Admin rank" class="btn btn-danger"></form>
         <!-- Footer content -->
         <footer class="m-0">
             <blockquote class="blockquote text-center">
