@@ -13,6 +13,7 @@
         <?php loadPartials('navBar', $user); ?>
         <!-- Header content -->
         <header>
+            <img class="logo d-block mx-auto" src="<?= WEBROOT ?>img/logo.png" alt="">
         </header>
 
         <?php loadPartials('logMessage'); ?>

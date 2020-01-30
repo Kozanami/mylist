@@ -11,7 +11,7 @@
                         {
                     ?> 
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="<?= WEBROOT ?>Library/index" class="nav-link">
                             Bibliothèque
                         </a>
                     </li>

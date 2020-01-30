@@ -1,7 +1,9 @@
 <div class="container-fluid col-auto d-flex justify-content-center text-center">
+
 	<form action="<?= WEBROOT ?>User/logIn" method="POST" class="content col-md-4 col-xs-fluid">
+	<img class="logo" src="<?= WEBROOT ?>img/logo.png" alt="">
 		<h1 class="text-center">Connexion</h1>
-		<div class="form-group">
+		<div class="form-group mt-2">
 			<label for="exampleInputEmail1">Email</label>
 			<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 			<small id="emailHelp" class="form-text text-muted">Ecrivez une adresse Email valide</small>

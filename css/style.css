@@ -11,27 +11,34 @@ body{
     background: var(--dark-bg)!important;
     color: #fff;
     position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr 7fr 1fr;
+    grid-template-areas: "nav"
+                         "header"
+                         "main"
+                         "footer";
+    height: 100vh;
 }
 
 .nav-bar-perso
 {
-    margin-bottom: 5vh;
     box-shadow: 0 2px 2px -2px rgb(255, 255, 255);
 }
 
+.logo
+{
+    margin: 2vh auto 2vh auto;
+}
+
 main{
-    min-height: 77vh;
-    position: relative;
+    height: auto;
+    margin-bottom: 5vh;
 }
 
 footer{
     padding: 2vh;
-    min-height: 10vh;
     background: hsl(210, 10%, 30%);
-    margin-top: 9vh;
-    position: relative;
     width: 100%;
-    bottom: 0;
 }
 
 
