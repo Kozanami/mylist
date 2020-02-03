@@ -103,6 +103,7 @@
 <script src="<?= WEBROOT ?>js/jquery-3.3.1.slim.min.js"></script>
 <script src="<?= WEBROOT ?>js/popper.min.js"></script>
 <script src="<?= WEBROOT ?>js/bootstrap.js"></script>
+<script src="<?= WEBROOT ?>js/dom-template.js"></script>
 <script>
 	// passage de l'url sauvegardé de php à js
 	var url = "<?php echo $_SESSION['url']?>";

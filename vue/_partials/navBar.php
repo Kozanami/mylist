@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top nav-bar-perso">
-            <a class="navbar-brand"  href="<?= WEBROOT ?>Library/index">Maliste</a>
+            <a class="navbar-brand"  href="<?= WEBROOT ?>Library/index">Memovie</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -86,10 +86,13 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item pr-1">
                         <a class="nav-link" href="<?= WEBROOT ?>User/index/">
-                            
                            <span class="mr-2 d-lg-inline text-gray-400 small font-weight-normal topbar-text-size"><?= $data->getFirstName().' '.$data->getLastName() ?></span>
                             <img src="<?= WEBROOT.'img/avatar/'.$data->getAvatar(); ?>" alt="image de profil" class="img-profile rounded-circle">
                         </a>
+                    </li>
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <li class="nav-item pr-1">
+                        <i id="btnSwap" class="far fa-lightbulb fa-2x p-2"></i>
                     </li>
                 </ul>
                 <?php 

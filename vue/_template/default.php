@@ -3,9 +3,21 @@
     <head>
         <meta charset="utf-8" />
         <title><?= $_SESSION['title'] ?></title>
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="<?= WEBROOT ?>css/bootstrap.css">
-        <link rel="stylesheet" href="<?= WEBROOT ?>css/style.css">
+        <?php 
+            if(isset($_COOKIE['color']))
+            {
+                $color = $_COOKIE['color'];
+            }
+            else
+            {
+                $color = "dark";
+                setcookie('color',$color,time()+31556926,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+            }
+        ?>
+        <link rel="stylesheet" type="text/css" href="<?= WEBROOT ?>css/style-<?= $color ?>.css" id="<?= $color ?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     </head>
     <body>
@@ -26,7 +38,7 @@
             <?php loadPartials('logMessage'); ?>
         </header>
 
-        <main class="container-fluid pb-5">
+        <main class="container-fluid pb-5 ">
         <?= $content ?>
         </main>
         <!-- Footer content -->
