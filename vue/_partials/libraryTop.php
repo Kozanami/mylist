@@ -1,4 +1,4 @@
-<a href="<?= WEBROOT.'Library/create' ?>"><button type="button" class="add-media btn text-light bg-info btn-lg btn-block"><i class="fas fa-plus"></i> Ajouter un élement à la liste</button></a>
+<a href="<?= WEBROOT.'Library/create' ?>"><button type="button" class="add-media btn text-light btn-lg btn-block border-color-perso"><i class="fas fa-plus"></i> Ajouter un élement à la liste</button></a>
 
 <?php loadPartials('filterTabs'); ?>
 

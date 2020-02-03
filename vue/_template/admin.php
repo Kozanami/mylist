@@ -5,18 +5,19 @@
         <title><?= $_SESSION['title'] ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="<?= WEBROOT ?>css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="<?= WEBROOT ?>css/default.css">
         <?php 
-                                                                            
             if(isset($_COOKIE['color']))
             {
                 $color = $_COOKIE['color'];
             }
             else
             {
-                $color = "dark"; 
+                $color = "dark";
+                setcookie('color',$color,time()+31556926,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
             }
         ?>
-        <link rel="stylesheet" href="<?= WEBROOT ?>css/style-<?= $color ?>.css" id="<?php echo '#'.$color ?>">
+        <link rel="stylesheet" type="text/css" href="<?= WEBROOT ?>css/style-<?= $color ?>.css" id="<?= $color ?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     </head>
     <body>

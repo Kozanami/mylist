@@ -19,15 +19,16 @@ function swap() {
         var color = '#light';
         var colorSwap = "dark";
     }
-
-    var splitted = document.querySelector(color).href;
+    var selectColor = document.querySelector(color);
+    selectColor.id = colorSwap;
+    var splitted = selectColor.href;
     
     splitted = splitted.split("-");
     
     splitted = splitted[0]+"-"+colorSwap;
     document.cookie = "color="+colorSwap+"; expires="+expire()+"; path=/";
-    document.querySelector(color).href = splitted;
-    document.querySelector(color).id = colorSwap;
+    selectColor.href = splitted;
+   window.location.reload();
 
 }
 

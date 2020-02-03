@@ -1,4 +1,4 @@
-<div class="library-border bg-info mt-0 p-2">
+<div class="library-border border-color-perso mt-0 p-2">
     <ul class="pagination justify-content-center mb-0">
 
           <?php
