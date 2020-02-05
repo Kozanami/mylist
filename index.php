@@ -99,11 +99,14 @@
 ?>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="<?= WEBROOT ?>js/script.js"></script>
-<script src="<?= WEBROOT ?>js/jquery-3.3.1.slim.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <script src="<?= WEBROOT ?>js/popper.min.js"></script>
 <script src="<?= WEBROOT ?>js/bootstrap.js"></script>
 <script src="<?= WEBROOT ?>js/dom-template.js"></script>
+<script src="<?= WEBROOT ?>js/script.js"></script>
 <script>
 	// passage de l'url sauvegardé de php à js
 	var url = "<?php echo $_SESSION['url']?>";

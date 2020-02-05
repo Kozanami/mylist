@@ -11,6 +11,7 @@ class Library extends AbstractEntity {
 	private $evaluation;
 	private $note;
 	private $userid;
+	private $like;
 
 	public function __construct($name,$category,$subcategory,$season,$smax,$episode,$epmax,$tag,$evaluation,$note,$userid){
 		$this->name = $name;
@@ -92,5 +93,15 @@ class Library extends AbstractEntity {
 	public function setUserId($userid) {
 		$this->userid = $userid;
 	}
+
+	public function getLike()
+	{
+		return $this->like;
+	}
+
+	public function setLike($like) {
+		$this->like = $like;
+	}
+
 } 
  ?>

@@ -35,13 +35,18 @@
     function logVar($type, $message, $log = null)
     {
         $_SESSION['logType'] = $type;
-        $_SESSION['logMessage'] = $GLOBALS['text'.$message];
+        $_SESSION['logMessage'] = $GLOBALS['message'.$message];
         
         if($log != null)
         {
             strval($log);
             $_SESSION['logContainerWidth'] = $log;
         }
+    }
+
+    function text($name)
+    {
+       return $GLOBALS['text'.$name];
     }
 
     /////////////////////////////////////////////////

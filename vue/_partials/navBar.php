@@ -39,13 +39,14 @@
                         } 
                     ?>
                 </ul>
+                <ul class="navbar-nav ml-auto">
                 <?php
                     
                     if (isset($_SESSION['id']))
                     {
 
                 ?>
-                    <ul class="navbar-nav ml-auto">
+
                     <li class="nav-item">
                         <a href="<?= WEBROOT ?>User/logOut" class="nav-link text-danger"> Déconnexion</a>
                     </li>
@@ -90,13 +91,13 @@
                             <img src="<?= WEBROOT.'img/avatar/'.$data->getAvatar(); ?>" alt="image de profil" class="img-profile rounded-circle">
                         </a>
                     </li>
+                <?php 
+                        } 
+                    ?>
                     <div class="topbar-divider d-none d-sm-block"></div>
                     <li class="nav-item pr-1">
                         <i id="btnSwap" class="far fa-lightbulb fa-2x p-2"></i>
                     </li>
                 </ul>
-                <?php 
-                        } 
-                    ?>
             </div>
         </nav>

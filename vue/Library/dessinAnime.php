@@ -6,6 +6,7 @@
         <th scope="col">Episode</th>
         <th scope="col">Saison</th>
         <th scope="col">Note</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -34,6 +35,25 @@
         <td class="d-lg-none d-block">
         <?= $data->getEvaluation(); ?>/10
         </td>
+        <td>
+            <?php 
+              $libraryId = $data->getId();
+              if($data->getLike()){
+                $type = "delete";
+                $icon = "fas fa-heart";
+                
+              }else{ 
+                $type = "add";
+                $icon = "far fa-heart";            
+              } 
+            ?>
+
+              <a href="#" onclick="DoLike('<?= $_SESSION['id'] ?>' , '<?= $libraryId ?>', '<?= WEBROOT.'Library' ?>');">
+
+                <i id="<?= $type.'Like'.$libraryId ?>" class="<?= $icon ?>"></i>
+
+              </a>
+            </td>
       </tr>
 
       <?php 	

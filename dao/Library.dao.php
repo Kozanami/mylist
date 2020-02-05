@@ -13,7 +13,6 @@ class DaoLibrary {
         {
             $datas = DB::request('SELECT * FROM library WHERE userid=? ORDER BY id LIMIT '.$firstEntry.', '.$_SESSION['entityByPage'].'',array($userid));
         }
-
         if (!empty($datas)) {
             foreach ($datas as $key => $data) {
                 $tabLibrary[$key] = new Library($data['name'],$data['category'],$data['subcategory'],$data['season'],$data['smax'],$data['episode'],$data['epmax'],$data['tag'],$data['evaluation'],$data['note'],$data['userid']);
@@ -29,6 +28,7 @@ class DaoLibrary {
                 $tabLibrary[$key]->setEvaluation($data['evaluation']);
                 $tabLibrary[$key]->setNote($data['note']);
                 $tabLibrary[$key]->setUserId($data['userid']);
+                $tabLibrary[$key]->setLike($this->readLikes($data['id']));
             }  
             return $tabLibrary;
         } else {
@@ -40,6 +40,7 @@ class DaoLibrary {
         $datas = DB::request('SELECT * FROM library WHERE id=?',array($id));
         if (!empty($datas)) {
             foreach ($datas as $key => $data) {
+                $like = $this->readLike($_SESSION['id'],$id);
                 $tabLibrary[$key] = new Library($data['name'],$data['category'],$data['subcategory'],$data['season'],$data['smax'],$data['episode'],$data['epmax'],$data['tag'],$data['evaluation'],$data['note'],$data['userid']);
                 $tabLibrary[$key]->setId($data['id']);
                 $tabLibrary[$key]->setName($data['name']);
@@ -88,6 +89,31 @@ class DaoLibrary {
 
         return $count[0]['COUNT(*)'];
     }
+
+    public function addLike($userId, $libraryId){
+        DB::request('INSERT INTO likes (userid, libraryid) VALUES (?,?)', array($userId, $libraryId));
+    }
+
+    public function readLike($userId, $libraryId){
+        $datas = DB::request('SELECT * FROM likes WHERE userid=? AND libraryid=?', array($userId, $libraryId));
+        if($datas)  
+        {
+            return $datas[0];
+        }   
+    }
+
+    public function readLikes($libraryId){
+        $datas = DB::request('SELECT * FROM likes WHERE libraryid=?', array($libraryId));
+        if($datas)  
+        {
+            return $datas;
+        }   
+    }
+
+    public function deleteLike($userId, $libraryId){
+       DB::request('DELETE FROM likes WHERE userid=? AND libraryid=?', array($userId, $libraryId));
+    }
+
 }
 
  ?>

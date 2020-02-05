@@ -18,7 +18,6 @@ class CtrlLibrary extends Controller {
 			$d['user'] = $this->DaoUser->read($_SESSION['id']);
 			$userid = $_SESSION['id'];
 			$this->loadDao('Library');
-
 			$currentPage = $id;
 
 			$firstEntry = ($currentPage-1)*$entityByPage;
@@ -58,6 +57,7 @@ class CtrlLibrary extends Controller {
 			}
 
 			$this->set($d);
+
 			$this->render('default','Library',$_SESSION['pageName'], $id);				
 		} 
 		else 
@@ -229,7 +229,6 @@ class CtrlLibrary extends Controller {
 			$d['user'] = $this->DaoUser->read($_SESSION['id']);
 			$userid = $_SESSION['id'];
 			$this->loadDao('Library');
-			
 			$d['library'] = $this->DaoLibrary->readOne($id,$userid);
 
 			foreach($d['library'] as $key => $data){}
@@ -237,7 +236,7 @@ class CtrlLibrary extends Controller {
 			$_SESSION['title'] = $data->getName();
 
 			$this->set($d);
-			$this->render('default','Library','detail',$id);
+			//$this->render('default','Library','detail',$id);
 		}
 		else 
 		{
@@ -264,6 +263,25 @@ class CtrlLibrary extends Controller {
 			logVar('danger','RequireAuth');
 			$this->render('default','User','logIn');	
 		}
+	}
+
+	public function deletelike(){
+
+		$userId = $_POST['user'];
+		$libraryId = $_POST['library'];
+
+		$this->loadDao('Library');
+		$this->DaoLibrary->deleteLike($userId,$libraryId);
+	}
+
+	public function addlike(){
+
+		$userId = $_POST['user'];
+		$libraryId = $_POST['library'];
+
+		$this->loadDao('Library');
+		$this->DaoLibrary->addLike($userId,$libraryId);
+		
 	}
 
 }

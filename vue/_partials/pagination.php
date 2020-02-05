@@ -12,19 +12,19 @@
 
             if($pageId-1 >= 1)
             {
-            ?>
-             <li class="page-item">
-              <a class="page-link" href="<?= WEBROOT ?><?= $controller ?>/<?= $pageName ?>/<?= $pageId-1 ?>">Previous</a>
-            </li>
-            <?php
+                ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= WEBROOT ?><?= $controller ?>/<?= $pageName ?>/<?= $pageId-1 ?>">Previous</a>
+                    </li>
+                <?php
             }
             else
             {
-            ?>
-            <li class="page-item disabled">
-                <a class="page-link" href="#">Previous</a>
-            </li>
-            <?php
+                ?>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                <?php
             }
             ?>
         <?php

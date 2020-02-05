@@ -20,6 +20,7 @@ function swap() {
         var colorSwap = "dark";
     }
     var selectColor = document.querySelector(color);
+    
     selectColor.id = colorSwap;
     var splitted = selectColor.href;
     
@@ -28,7 +29,9 @@ function swap() {
     splitted = splitted[0]+"-"+colorSwap;
     document.cookie = "color="+colorSwap+"; expires="+expire()+"; path=/";
     selectColor.href = splitted;
-   window.location.reload();
+    $('body').fadeOut(0, function(){
+        $('body').fadeIn(0);
+    });
 
 }
 
