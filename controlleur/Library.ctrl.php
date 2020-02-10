@@ -101,8 +101,8 @@ class CtrlLibrary extends Controller {
 	{
 		$_SESSION['title'] = 'Modifier';
 		if (isset($_SESSION['id'])) {
-		$this->loadDao('User');
-		$d['user'] = $this->DaoUser->read($_SESSION['id']);
+			$this->loadDao('User');
+			$d['user'] = $this->DaoUser->read($_SESSION['id']);
 			if (!empty($this->input)) {
 
 				$this->loadDao('Library');
@@ -236,7 +236,7 @@ class CtrlLibrary extends Controller {
 			$_SESSION['title'] = $data->getName();
 
 			$this->set($d);
-			//$this->render('default','Library','detail',$id);
+			$this->render('default','Library','detail',$id);
 		}
 		else 
 		{

@@ -9,7 +9,7 @@
 	</div>
 
 	<form action="<?php WEBROOT ?>Library/edit" method="POST" class="content col-auto">
-		<h1 class="text-center">Ajouter un média à ma liste</h1>
+		<h1 class="text-center">Editer un média de ma liste</h1>
 		<input type="hidden" name="id" value="<?php $data->getId(); ?>">
 		
 		<div class="form-group">
