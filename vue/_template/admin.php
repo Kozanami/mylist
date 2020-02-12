@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <title><?= $_SESSION['title'] ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="<?= WEBROOT ?>css/bootstrap.css">
+        <link rel="stylesheet" href="<?= WEBROOT ?>css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="<?= WEBROOT ?>css/default.css">
         <?php 
             if(isset($_COOKIE['color']))

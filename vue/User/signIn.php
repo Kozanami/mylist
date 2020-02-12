@@ -2,12 +2,12 @@
 	<form action="<?= WEBROOT ?>User/signIn" method="POST" class="content col-md-4 col-xs-fluid">
 		<h1 class="text-center">Inscription</h1>
 		<div class="form-group">
-			<label for="exampleInputEmail1">Email</label>
-			<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+			<label for="emailHelp">Email</label>
+			<input type="email" name="email" class="form-control" id="emailHelp" aria-describedby="emailHelp">
 			<small id="emailHelp" class="form-text text-muted">Ecrivez une adresse Email valide</small>
 		</div>
 		<div class="form-group">
-			<label for="Password">Mot de passe</label>
+			<label for="password">Mot de passe</label>
 			<input type="password" name="password" id="password" class="form-control" id="exampleInputPassword1">
 			<small id="password" class="form-text text-muted">Sécurité de votre mot de passe</small>
 		</div>
