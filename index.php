@@ -1,18 +1,20 @@
 <?php session_start();
 
-
-
 	define('WEBROOT',str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 	// ROOT => dossier du projet de la racine du disque dur
 	define('ROOT',str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 
 	define('SERVERNAME',basename(__DIR__));
-
-	if($_SERVER['HTTPS'] != true){
-		$location = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-		header('HTTP/1.1 301 Moved Permanently');
-		header('Location: ' . $location);
+	
+	if($_SERVER['SERVER_ADDR'] != '127.0.0.1')
+	{
+		if($_SERVER['HTTPS'] != true){
+			$location = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			header('HTTP/1.1 301 Moved Permanently');
+			header('Location: ' . $location);
+		}
 	}
+
 
 	// Init 
 	require_once('core/bdd.php');
