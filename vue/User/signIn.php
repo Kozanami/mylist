@@ -8,13 +8,14 @@
 		</div>
 		<div class="form-group">
 			<label for="password">Mot de passe</label>
-			<input type="password" name="password" id="password" class="form-control" id="exampleInputPassword1">
+			<input type="password" name="password" id="password" class="form-control password">
 			<small id="password" class="form-text text-muted">Sécurité de votre mot de passe</small>
 		</div>
 		<div class="form-group">
-			<div class="progress">
-				<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+			<div class="progress" style="display: none;">
+				<div class="pwdStrength progress-bar progress-bar-striped" id="pwdStrength" role="progressbar" style="width: 0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
+			<small id="pwdStrength" class="form-text text-muted pwdStrengthLabel color-perso"></small>
 		</div>
 			<button type="submit" class="btn btn-primary col-lg">Submit</button>
 	</form>

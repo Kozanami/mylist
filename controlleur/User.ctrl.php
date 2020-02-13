@@ -9,8 +9,6 @@ class CtrlUser extends Controller {
 			$this->set($d);
 			$this->render('default','User','index');
 		} else {
-			$this->set($d); 
-			logVar('danger','RequireAuth');
 			$this->render('default','User','logIn');
 		}
 
@@ -197,7 +195,10 @@ class CtrlUser extends Controller {
 			if ($user != null) {
 				$passInput = htmlentities($this->input['password']);
 				$passUser = $user->getPassword();
-				$rememberUser = htmlentities($_POST['rememberme']);
+				if(isset($_POST['rememberme']))
+				{
+					$rememberUser = htmlentities($_POST['rememberme']);
+				}
 				// on vérifie que le POST['rememberme'] existe sinon on attribut false a la variable $rememberUser
 				if (password_verify($passInput, $passUser)) {
 					$_SESSION['id'] = htmlentities($user->getId());
@@ -216,7 +217,7 @@ class CtrlUser extends Controller {
 					header('Location:'.WEBROOT.'Library/index');
 				} else {
 					logVar('danger','MailPassError');
-					$this->render('default','Library','index');
+					$this->render('default','User','logIn');
 				}
 			} else {
 				logVar('danger','MailPassError');
