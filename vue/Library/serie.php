@@ -42,7 +42,9 @@
                 $type = "delete";
                 $icon = "fas fa-heart";
                 
-              }else{ 
+              }
+              else
+              { 
                 $type = "add";
                 $icon = "far fa-heart";            
               } 

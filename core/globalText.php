@@ -20,11 +20,11 @@
 
 //  TEXTES
 
-$textType1 = "Tous";
-$textType2 = "Films";
-$textType3 = "Séries";
-$textType4 = "Animés";
-$textType5 = "Dessins Animés";
-$textType6 = "Courts Métrages";
+    $textType1 = "Tous";
+    $textType2 = "Films";
+    $textType3 = "Séries";
+    $textType4 = "Animés";
+    $textType5 = "Dessins Animés";
+    $textType6 = "Courts Métrages";
 
 ?>

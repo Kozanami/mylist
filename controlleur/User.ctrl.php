@@ -237,4 +237,3 @@ class CtrlUser extends Controller {
 		header('Location:'.WEBROOT.'User/logIn');
 	}
 }
-?>

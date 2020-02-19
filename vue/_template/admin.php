@@ -2,10 +2,12 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title><?= $_SESSION['title'] ?></title>
+        <title>Memovie : <?= $_SESSION['title'] ?></title>
+        <meta name="description" content="Memovie vous aidera à vous rappellez ce que vous avez regarder et plus encore !" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="<?= WEBROOT ?>css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="<?= WEBROOT ?>css/default.css">
+        <link rel="stylesheet" type="text/css" href="<?= WEBROOT ?>css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="<?= WEBROOT ?>css/structure.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
         <?php 
             if(isset($_COOKIE['color']))
             {
@@ -18,7 +20,7 @@
             }
         ?>
         <link rel="stylesheet" type="text/css" href="<?= WEBROOT ?>css/style-<?= $color ?>.css" id="<?= $color ?>">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+
     </head>
     <body>
         <!-- Navbar content -->

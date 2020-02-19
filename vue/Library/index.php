@@ -39,11 +39,14 @@
             <td>
             <?php 
               $libraryId = $data->getId();
-              if($data->getLike()){
+              if($data->getLike())
+              {
                 $type = "delete";
                 $icon = "fas fa-heart";
                 
-              }else{ 
+              }
+              else
+              { 
                 $type = "add";
                 $icon = "far fa-heart";            
               } 

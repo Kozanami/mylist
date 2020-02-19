@@ -37,23 +37,27 @@
         </td>
         <td>
             <?php 
+            
               $libraryId = $data->getId();
-              if($data->getLike()){
+              if($data->getLike())
+              {
                 $type = "delete";
                 $icon = "fas fa-heart";
                 
-              }else{ 
+              }
+              else
+              { 
                 $type = "add";
                 $icon = "far fa-heart";            
               } 
             ?>
 
-              <a href="#" onclick="DoLike('<?= $_SESSION['id'] ?>' , '<?= $libraryId ?>', '<?= WEBROOT.'Library' ?>');">
+            <a href="#" onclick="DoLike('<?= $_SESSION['id'] ?>' , '<?= $libraryId ?>', '<?= WEBROOT.'Library' ?>');">
 
-                <i id="<?= $type.'Like'.$libraryId ?>" class="<?= $icon ?>"></i>
+            <i id="<?= $type.'Like'.$libraryId ?>" class="<?= $icon ?>"></i>
 
-              </a>
-            </td>
+          </a>
+        </td>
       </tr>
 
       <?php 	

@@ -1,8 +1,9 @@
 <?php 
-require_once('model/Admin.class.php');
 
-class DaoAdmin {
+    require_once('model/Admin.class.php');
 
-}
+    class DaoAdmin {
+
+    }
 
  ?>

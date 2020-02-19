@@ -1,8 +1,3 @@
-
-<?php 
-	// if (isset($data)) 
-	// {	
-?>
 <div class="container-fluid col-md-6 text-center">
 <div class="add-media bg-info mt-0 p-2"></div>
 <table class="table table-dark mb-0 table-hover table-responsive-sm">
@@ -44,10 +39,3 @@
   </table>
     <?php loadPartials('pagination'); ?>
 </div>
-<?php 
-	// }
-	// else
-	// {
-	// 	header('Location:'.WEBROOT.'Library/index');
-	// }
-?>
